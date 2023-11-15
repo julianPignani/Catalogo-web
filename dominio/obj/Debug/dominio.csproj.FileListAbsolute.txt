@@ -1,0 +1,6 @@
+C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\dominio\bin\Debug\dominio.dll
+C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\dominio\bin\Debug\dominio.pdb
+C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
+C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
+C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\dominio\obj\Debug\dominio.dll
+C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\dominio\obj\Debug\dominio.pdb
