@@ -30,6 +30,13 @@ namespace negocio
             comando.CommandType = System.Data.CommandType.Text;
             comando.CommandText = consulta;
         }
+        //Seteamos la query u le creamos el stored procedure
+        public void setearStoredProcedure(string sp)
+        {
+            comando.CommandType = System.Data.CommandType.StoredProcedure;
+            comando.CommandText = sp;
+        }
+
         //Metodo que ejecuta la lectura
         public void ejecutarQuery()
         {

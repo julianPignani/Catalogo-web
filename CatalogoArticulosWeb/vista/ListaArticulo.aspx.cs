@@ -13,7 +13,7 @@ namespace vista
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listar();
+            dgvArticulos.DataSource = negocio.listarConSP();
             dgvArticulos.DataBind();
         }
     }

@@ -68,6 +68,58 @@ namespace negocio
             }
 
         }
+        //Metodo para listar con Stored Procedure
+        public List<Articulo> listarConSP()
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Articulo> lista = new List<Articulo>();
+
+            try
+            {
+
+                datos.setearStoredProcedure("storedListar");
+                datos.ejecutarQuery();
+               // datos.ejecutarAccion();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    //Validamos la urlImagen por si esta null (Sirve para cualquier columna que no puede ser null)
+                    if (!(datos.Lector["ImagenUrl"] is DBNull)) //si no es null
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+
+                    lista.Add(aux);
+                }
+
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+        }
 
         //Metodo para agregar un Articulo
         public void agregar(Articulo nuevo)

@@ -7,3 +7,12 @@ C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel
 C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\negocio\obj\Debug\negocio.csproj.CopyComplete
 C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\negocio\obj\Debug\negocio.dll
 C:\C-sharp-MaxiPrograma\TPFinalNivel2_Pignani\TPFinalNivel2_C-Sharp\TPFinalNivel2_Pignani\negocio\obj\Debug\negocio.pdb
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\bin\Debug\negocio.dll
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\bin\Debug\negocio.pdb
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\bin\Debug\dominio.dll
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\bin\Debug\dominio.pdb
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.csproj.AssemblyReference.cache
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.csproj.CoreCompileInputs.cache
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.csproj.CopyComplete
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.dll
+C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.pdb
