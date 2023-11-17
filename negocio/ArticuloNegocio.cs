@@ -79,7 +79,7 @@ namespace negocio
 
                 datos.setearStoredProcedure("storedListar");
                 datos.ejecutarQuery();
-               // datos.ejecutarAccion();
+               
 
                 while (datos.Lector.Read())
                 {
@@ -137,6 +137,7 @@ namespace negocio
                 datos.setearParametros("@imagenUrl", nuevo.ImagenUrl);
                 datos.setearParametros("@precio", nuevo.Precio);
 
+                //ejecutarAccion va cuando le pasamos los parametros.
                 datos.ejecutarAccion();
 
             }
