@@ -8,8 +8,8 @@
         <p>Explora nuestra variedad completa de productos.</p>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
-           
-            <% foreach (dominio.Articulo articulo in ListaArticulos)
+
+            <%-- <% foreach (dominio.Articulo articulo in ListaArticulos)
                 { %>
             <div class="col">
                 <div class="card h-100">
@@ -22,7 +22,23 @@
                 </div>
             </div>
 
-            <%  } %>
+            <%  } %> --%>
+
+            <asp:Repeater ID="repRepetidor" runat="server">
+                <ItemTemplate>
+                    <div class="col">
+                        <div class="card h-100">
+                            <img src="<%#Eval("ImagenUrl")%>" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title"><%#Eval("Nombre")%></h5>
+                                <p class="card-text"><%#Eval("Descripcion")  %></p>
+                                <a href="VerDetalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">Ver Detalle</a>
+                                <asp:Button Text="Ver detalle" CssClass="btn btn-primary" runat="server" id="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloId" OnClick="btnVerDetalle_Click"/>
+                            </div>
+                        </div>
+                    </div>
+                </ItemTemplate>
+            </asp:Repeater>
         </div>
     </div>
 </asp:Content>

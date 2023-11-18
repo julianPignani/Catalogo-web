@@ -19,6 +19,20 @@ namespace vista
             //Instanciamos la clase ArticuloNegocio para poder traernos la lista
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.listarConSP();
+
+            //Validamos
+            if (!IsPostBack)
+            {
+                repRepetidor.DataSource = ListaArticulos;
+                repRepetidor.DataBind();
+
+            }
+        }
+
+        protected void btnVerDetalle_Click(object sender, EventArgs e)
+        {
+            //Capturamos el argumento que viene a través del btnVerDetalle con el Id.
+            string valor = ((Button)sender).CommandArgument;
         }
     }
 }
