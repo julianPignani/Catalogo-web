@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <div class="container">
-        <h2>Catálogo de Artículos</h2>
+        <h2><u>Catálogo de Artículos</u></h2>
         <p>Explora nuestra variedad completa de productos.</p>
 
         <div class="row row-cols-1 row-cols-md-3 g-4">
@@ -32,7 +32,7 @@
                             <div class="card-body">
                                 <h5 class="card-title"><%#Eval("Nombre")%></h5>
                                 <p class="card-text"><%#Eval("Descripcion")  %></p>
-                                <a href="VerDetalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">Ver Detalle</a>
+                                <a href="VerDetalle.aspx?id=<%#Eval("Id") %>" >Ver Detalle</a>
                                 <asp:Button Text="Ver detalle" CssClass="btn btn-primary" runat="server" id="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloId" OnClick="btnVerDetalle_Click"/>
                             </div>
                         </div>
