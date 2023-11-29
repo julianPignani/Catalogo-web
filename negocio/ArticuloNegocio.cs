@@ -151,6 +151,36 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+        //Metodo para agregar un Articulo con StoredProdecedure
+        public void agregarconSP(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //Llamamos al metodo setearQuery para pasarle la consulta,SetearParametros y ejecutarAccion
+                datos.setearStoredProcedure("storedAltaArticulo");
+                datos.setearParametros("@codigo", nuevo.Codigo);
+                datos.setearParametros("@nombre", nuevo.Nombre);
+                datos.setearParametros("@descripcion", nuevo.Descripcion);
+                datos.setearParametros("@idMarca", nuevo.Marca.Id);
+                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
+                datos.setearParametros("@imagenUrl", nuevo.ImagenUrl);
+                datos.setearParametros("@precio", nuevo.Precio);
+
+                //ejecutarAccion va cuando le pasamos los parametros.
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         //Metodo para modificar
         public void modificar(Articulo existente)
         {
@@ -181,6 +211,8 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+
 
         //Creamos el metodo para Eliminar un Artículo
         public void eliminar(int id)

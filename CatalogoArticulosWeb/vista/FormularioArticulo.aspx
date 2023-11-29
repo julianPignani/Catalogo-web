@@ -12,11 +12,11 @@
             </div>
             <div class="mb-3">
                 <label for="txtCodigo" class="form-label">Codigo</label>
-                <asp:TextBox ID="TextCodigo" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtCodigo" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
                 <label for="txtNombre" class="form-label">Nombre</label>
-                <asp:TextBox ID="TexNombre" CssClass="form-control" runat="server"></asp:TextBox>
+                <asp:TextBox ID="txtNombre" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
 
             <div class="mb-3">
@@ -32,7 +32,7 @@
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <asp:Button Text="Aceptar" CssClass="btn btn-primary" OnClick="Unnamed_Click" runat="server" />
+                <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary"  runat="server" />
                 <a href="ListaArticulo.aspx">Cancelar</a>
             </div>
         </div>
@@ -49,7 +49,7 @@
                         <asp:TextBox runat="server" ID="txtImagenUrl" CssClass="form-control" AutoPostBack="true" OnTextChanged="txtImagenUrl_TextChanged" />
                     </div>
                     <asp:Image ImageUrl="https://i0.wp.com/casagres.com.ar/wp-content/uploads/2022/09/placeholder.png?ssl=1"
-                        runat="server" ID="imgArticulos" Width="80%" />
+                        runat="server" ID="imgArticulos" Width="60%" />
                 </ContentTemplate>
             </asp:UpdatePanel>
 
