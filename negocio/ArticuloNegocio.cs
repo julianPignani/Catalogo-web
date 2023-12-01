@@ -11,7 +11,8 @@ namespace negocio
     public class ArticuloNegocio
     {
         //Creamos el metodo listar
-        public List<Articulo> listar()
+        //Agregando el parametro vacio, se agrega como opcional, entonces en la consulta podemos evaluar con un if si lleva un id o no y concatenar la consulta
+        public List<Articulo> listar(string id= "")
         {
             //Creamos la lista articulos y instanciamos la AccesoDatos para la conexion
             List<Articulo> lista = new List<Articulo>();
@@ -24,7 +25,9 @@ namespace negocio
             {
                 conexion.ConnectionString = "server =.\\SQLEXPRESS01; database = CATALOGO_DB; integrated security = true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT A.Id, Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, M.Id as IdMarca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria";
+                comando.CommandText = "SELECT A.Id, Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, M.Id as IdMarca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria ";
+                if (id != "") //validamos si viene con un id
+                    comando.CommandText += " and A.Id = " + id; //esto devuelve una lista, pero solo el articulo con el num del id(esto para el metodo modificar)
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -121,36 +124,6 @@ namespace negocio
 
         }
 
-        //Metodo para agregar un Articulo
-        public void agregar(Articulo nuevo)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                //Llamamos al metodo setearQuery para pasarle la consulta,SetearParametros y ejecutarAccion
-                datos.setearQuery("INSERT INTO ARTICULOS(Codigo,Nombre,Descripcion,IdMarca,IdCategoria,ImagenUrl,Precio) VALUES (@codigo,@nombre,@descripcion,@idMarca,@idCategoria,@imagenUrl,@precio)");
-                datos.setearParametros("@codigo", nuevo.Codigo);
-                datos.setearParametros("@nombre", nuevo.Nombre);
-                datos.setearParametros("@descripcion", nuevo.Descripcion);
-                datos.setearParametros("@idMarca", nuevo.Marca.Id);
-                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
-                datos.setearParametros("@imagenUrl", nuevo.ImagenUrl);
-                datos.setearParametros("@precio", nuevo.Precio);
-
-                //ejecutarAccion va cuando le pasamos los parametros.
-                datos.ejecutarAccion();
-
-            }
-            catch (Exception ex)
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
         //Metodo para agregar un Articulo con StoredProdecedure
         public void agregarconSP(Articulo nuevo)
         {
@@ -181,8 +154,94 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
+
+        public void modificarconSP(Articulo existente)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearStoredProcedure("storedModificarArticulo");
+                datos.setearParametros("@codigo", existente.Codigo);
+                datos.setearParametros("@nombre", existente.Nombre);
+                datos.setearParametros("@idMarca", existente.Marca.Id);
+                datos.setearParametros("@idCategoria", existente.Categoria.Id);
+                datos.setearParametros("@precio", existente.Precio);
+                datos.setearParametros("@descripcion", existente.Descripcion);
+                datos.setearParametros("@imagenUrl", existente.ImagenUrl);
+                datos.setearParametros("@id", existente.Id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+   
+        
+        
+
+        //Creamos el metodo para Eliminar un Artículo
+        public void eliminar(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                datos.setearQuery("DELETE FROM ARTICULOS where id = @id");
+                datos.setearParametros("@id", id);
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex )
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
+        //Metodo para agregar un Articulo
+        /*public void agregar(Articulo nuevo)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //Llamamos al metodo setearQuery para pasarle la consulta,SetearParametros y ejecutarAccion
+                datos.setearQuery("INSERT INTO ARTICULOS(Codigo,Nombre,Descripcion,IdMarca,IdCategoria,ImagenUrl,Precio) VALUES (@codigo,@nombre,@descripcion,@idMarca,@idCategoria,@imagenUrl,@precio)");
+                datos.setearParametros("@codigo", nuevo.Codigo);
+                datos.setearParametros("@nombre", nuevo.Nombre);
+                datos.setearParametros("@descripcion", nuevo.Descripcion);
+                datos.setearParametros("@idMarca", nuevo.Marca.Id);
+                datos.setearParametros("@idCategoria", nuevo.Categoria.Id);
+                datos.setearParametros("@imagenUrl", nuevo.ImagenUrl);
+                datos.setearParametros("@precio", nuevo.Precio);
+
+                //ejecutarAccion va cuando le pasamos los parametros.
+                datos.ejecutarAccion();
+
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }*/
+
         //Metodo para modificar
-        public void modificar(Articulo existente)
+        /*public void modificar(Articulo existente)
         {
             AccesoDatos datos = new AccesoDatos();
 
@@ -210,31 +269,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-        }
-
-
-
-        //Creamos el metodo para Eliminar un Artículo
-        public void eliminar(int id)
-        {
-            AccesoDatos datos = new AccesoDatos();
-            try
-            {
-                datos.setearQuery("DELETE FROM ARTICULOS where id = @id");
-                datos.setearParametros("@id", id);
-                datos.ejecutarAccion();
-
-            }
-            catch (Exception ex )
-            {
-
-                throw ex;
-            }
-            finally
-            {
-                datos.cerrarConexion();
-            }
-        }
+        }*/
     }
 
 
