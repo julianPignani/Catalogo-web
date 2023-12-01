@@ -11,12 +11,15 @@ namespace vista
 {
     public partial class FormularioArticulo : System.Web.UI.Page
     {
+        public bool ConfirmarEliminacion { get; set; }
         public List<Articulo> ListaArticulos { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
             //ponemos la caja de texto del id en Enabled para que no se pueda modificar
             txtId.Enabled = false;
 
+            //Ponemos en false el confirmar eliminacion para que nos apareza la validacion si toca eliminar
+            ConfirmarEliminacion = false;
             try
             {
                 //configuración inicial de la pantalla
@@ -117,6 +120,30 @@ namespace vista
                 Session.Add("error", ex);//Capturamos el error y lo guardamos en una session
                 throw;
                 //redireccion pantalla error
+            }
+        }
+
+        protected void btnEliminar_Click(object sender, EventArgs e)
+        {
+            ConfirmarEliminacion = true;
+        }
+
+        protected void btnConfirmarEliminar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (chkConfirmaEliminar.Checked) //Si esta chekeado (o sea, tildo el cuadrado para borrar)
+                {
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.eliminarconSP(int.Parse(txtId.Text));
+                    Response.Redirect("ListaArticulo.aspx");
+                }
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex);
+                throw;
             }
         }
     }

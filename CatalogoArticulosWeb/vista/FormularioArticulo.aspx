@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-   <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>
+    <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>
     <div class="row">
         <div class="col-6">
             <div class="mb-3">
@@ -32,7 +32,7 @@
                 <asp:TextBox ID="txtPrecio" CssClass="form-control" runat="server"></asp:TextBox>
             </div>
             <div class="mb-3">
-                <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary"  runat="server" />
+                <asp:Button Text="Aceptar" ID="btnAceptar" OnClick="btnAceptar_Click" CssClass="btn btn-primary" runat="server" />
                 <a href="ListaArticulo.aspx">Cancelar</a>
             </div>
         </div>
@@ -52,7 +52,24 @@
                         runat="server" ID="imgArticulos" Width="60%" />
                 </ContentTemplate>
             </asp:UpdatePanel>
-
         </div>
     </div>
+    <asp:UpdatePanel runat="server">
+        <ContentTemplate>
+            <div class="row">
+                <div class="col-6">
+                    <div class="mb-3">
+                        <asp:Button Text="Eliminar" ID="btnEliminar" OnClick="btnEliminar_Click" CssClass="btn btn-danger" runat="server" />
+                    </div>
+                    <%if (ConfirmarEliminacion)
+                        { %>
+                    <div class="mb-3">
+                        <asp:CheckBox Text="Confirmar Eliminación"  ID="chkConfirmaEliminar" runat="server" />
+                        <asp:Button Text="Eliminar" ID="btnConfirmarEliminar" OnClick="btnConfirmarEliminar_Click" CssClass="btn btn-outline-danger" runat="server" />
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </ContentTemplate>
+    </asp:UpdatePanel>
 </asp:Content>

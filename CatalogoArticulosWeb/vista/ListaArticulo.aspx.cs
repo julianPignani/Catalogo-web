@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using dominio;
 
 namespace vista
 {
@@ -13,7 +14,8 @@ namespace vista
         protected void Page_Load(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
-            dgvArticulos.DataSource = negocio.listarConSP();
+            Session.Add("listaArticulo", negocio.listarConSP()); //está modificacion de agregarlo en la Session me sirve para capturar la session en el filtro
+            dgvArticulos.DataSource = Session["listaArticulo"];
             dgvArticulos.DataBind();
         }
 
@@ -29,6 +31,15 @@ namespace vista
         {
             //Manejamos el pageIndex para que cambie de pagina cuando hacemos click en los numeros
             dgvArticulos.PageIndex = e.NewPageIndex;
+            dgvArticulos.DataBind();
+        }
+
+        //Evento para filtrar la busqueda
+        protected void filtro_TextChanged(object sender, EventArgs e)
+        {
+            List<Articulo> lista = (List<Articulo>)Session["listaArticulo"]; //Traigo la lista, que está guardada en Session
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())); //lambda expression
+            dgvArticulos.DataSource = listaFiltrada;
             dgvArticulos.DataBind();
         }
     }

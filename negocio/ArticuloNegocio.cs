@@ -184,11 +184,30 @@ namespace negocio
             }
         }
    
-        
+        public void eliminarconSP(int id)
+        {
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                datos.setearStoredProcedure("storedEliminarArticulo");
+                datos.setearParametros("@id", id);
+                datos.ejecutarAccion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
         
 
         //Creamos el metodo para Eliminar un Artículo
-        public void eliminar(int id)
+        /*public void eliminar(int id)
         {
             AccesoDatos datos = new AccesoDatos();
             try
@@ -207,7 +226,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-        }
+        }*/
 
         //Metodo para agregar un Articulo
         /*public void agregar(Articulo nuevo)
