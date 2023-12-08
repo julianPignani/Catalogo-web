@@ -11,12 +11,24 @@ namespace vista
 {
     public partial class ListaArticulo : System.Web.UI.Page
     {
+        //Propiedad para manejar el filtro avanzado
+        public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
-            ArticuloNegocio negocio = new ArticuloNegocio();
-            Session.Add("listaArticulo", negocio.listarConSP()); //está modificacion de agregarlo en la Session me sirve para capturar la session en el filtro
-            dgvArticulos.DataSource = Session["listaArticulo"];
-            dgvArticulos.DataBind();
+            FiltroAvanzado = chkAvanzado.Checked; //para no perder el valor de la variable a cuando recarga la pagina
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                Session.Add("listaArticulo", negocio.listarConSP()); //está modificacion de agregarlo en la Session me sirve para capturar la session en el filtro
+                dgvArticulos.DataSource = Session["listaArticulo"];
+                dgvArticulos.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex);
+            }
         }
 
         protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
@@ -41,6 +53,64 @@ namespace vista
             List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())); //lambda expression
             dgvArticulos.DataSource = listaFiltrada;
             dgvArticulos.DataBind();
+        }
+
+        protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
+        {
+            FiltroAvanzado = chkAvanzado.Checked;
+            txtFiltro.Enabled = !FiltroAvanzado;
+        }
+
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                ddlCriterio.Items.Clear();
+                if (ddlCampo.SelectedItem.ToString() == "Nombre")
+                {
+                    ddlCriterio.Items.Add("Contiene ");
+                    ddlCriterio.Items.Add("Comienza con ");
+                    
+                }
+                else if (ddlCampo.SelectedItem.ToString() == "Marca")
+                {
+                    ddlCriterio.Items.Add("Contiene");
+                    ddlCriterio.Items.Add("Comienza con ");
+                    
+
+                }
+                else
+                {
+                    ddlCriterio.Items.Add("Contiene");
+                    ddlCriterio.Items.Add("Comienza con ");
+                    
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+
+            }
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                dgvArticulos.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                    ddlCriterio.SelectedItem.ToString(),
+                    txtFiltroAvanzado.Text);
+                dgvArticulos.DataBind();
+
+
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex);
+
+            }
         }
     }
 }

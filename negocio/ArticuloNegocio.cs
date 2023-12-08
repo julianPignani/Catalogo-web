@@ -12,7 +12,7 @@ namespace negocio
     {
         //Creamos el metodo listar
         //Agregando el parametro vacio, se agrega como opcional, entonces en la consulta podemos evaluar con un if si lleva un id o no y concatenar la consulta
-        public List<Articulo> listar(string id= "")
+        public List<Articulo> listar(string id = "")
         {
             //Creamos la lista articulos y instanciamos la AccesoDatos para la conexion
             List<Articulo> lista = new List<Articulo>();
@@ -56,7 +56,7 @@ namespace negocio
 
                     lista.Add(aux);
                 }
-                
+
 
                 return lista;
             }
@@ -82,7 +82,7 @@ namespace negocio
 
                 datos.setearStoredProcedure("storedListar");
                 datos.ejecutarQuery();
-               
+
 
                 while (datos.Lector.Read())
                 {
@@ -183,7 +183,7 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-   
+
         public void eliminarconSP(int id)
         {
             AccesoDatos datos = new AccesoDatos();
@@ -204,7 +204,100 @@ namespace negocio
                 datos.cerrarConexion();
             }
         }
-        
+
+        public List<Articulo> filtrar(string campo, string criterio, string filtro)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+
+            try
+            {
+                string consulta = "Select A.Id ,Codigo , Nombre , A.Descripcion , M.Descripcion Marca, C.Descripcion Categoria, A.IdMarca, A.IdCategoria, Precio from ARTICULOS A, MARCAS M, CATEGORIAS C where M.Id = A.IdMarca and C.Id = A.IdCategoria And  ";
+                if (campo == "Nombre")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "Nombre like '" + filtro + "%' ";
+                            break;
+                        case "contiene":
+                            consulta += "Nombre like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "Nombre like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else if (campo == "Marca")
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "M.Descripcion like '" + filtro + "%' ";
+                            break;
+                        case "contiene":
+                            consulta += "M.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "M.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+                else
+                {
+                    switch (criterio)
+                    {
+                        case "Comienza con":
+                            consulta += "C.Descripcion like '" + filtro + "%' ";
+                            break;
+                        case "contiene ":
+                            consulta += "C.Descripcion like '%" + filtro + "'";
+                            break;
+                        default:
+                            consulta += "C.Descripcion like '%" + filtro + "%'";
+                            break;
+                    }
+                }
+
+                datos.setearQuery(consulta);
+                datos.ejecutarQuery();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+                    aux.Precio = (decimal)datos.Lector["Precio"];
+                    
+
+                    lista.Add(aux);
+
+                }
+
+                return lista;
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
 
         //Creamos el metodo para Eliminar un Artículo
         /*public void eliminar(int id)
