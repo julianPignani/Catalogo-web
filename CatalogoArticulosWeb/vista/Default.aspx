@@ -7,10 +7,10 @@
 
     <div class="container">
         <div class="container text-center mt-5">
-            <h1><u>Catálogo de Artículos</u></h1>
+            <h1 class="display-4 font-bold text-primary m-3" ><u>Explora Nuestro Catálogo de Artículos</u></h1>
         </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-3">
 
         <%-- <% foreach (dominio.Articulo articulo in ListaArticulos)
                 { %>
@@ -30,12 +30,12 @@
         <asp:Repeater ID="repRepetidor" runat="server">
             <ItemTemplate>
                 <div class="col">
-                    <div class="card h-100">
+                    <div class="card h-100 d-flex justify-content-center align-items-center">
                         <img src="<%#Eval("ImagenUrl")%>" class="card-img-top" alt="...">
-                        <div class="card-body">
+                        <div class="card-body text-center  ">
                             <h5 class="card-title"><%#Eval("Nombre")%></h5>
                             <p class="card-text"><%#Eval("Descripcion")  %></p>
-                            <a href="VerDetalle.aspx?id=<%#Eval("Id") %>">Ver Detalle</a>
+                            <%--<a href="VerDetalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">Ver Detalle</a>--%>  <%--otra forma de poder hacerlo--%>
                             <asp:Button Text="Ver detalle" CssClass="btn btn-primary" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloId" OnClick="btnVerDetalle_Click" />
                         </div>
                     </div>

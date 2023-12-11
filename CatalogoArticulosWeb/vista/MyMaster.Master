@@ -10,12 +10,12 @@
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
     <div class="container-fluid text-center mt-4 bg-dark text-white">
         <h1 class="display-4">Bienvenidos a TegnoMundo</h1>
         <p class="lead font-bold fs-4">Encuentra los mejores productos para tu entretenimiento.</p>
     </div>
-    <div class="p-3 mb-2 bg-warning-subtle text-emphasis-warning">
+    <div class="p-3 mb-2 bg-warning-subtle text-emphasis-warning flex-grow-1">
         <form id="form1" runat="server">
             <nav class="navbar bg-transparent navbar-expand-lg border-body shadow" data-bs-theme="dark">
                 <div class="container-fluid p-0">
@@ -49,13 +49,13 @@
                 </asp:ContentPlaceHolder>
             </div>
         </form>
-        <footer class="container-fluid text-center mt-4 mb-0 bg-dark text-white">
+        <%--<footer class="container-fluid text-center mt-4 mb-0 bg-dark text-white">
             <div class="align-content-center">
                 <h5 class="text-white">Julián Pignani</h5>
                 <h5 class="text-white">Desarrolador .Net</h5>
                 <h5 class="text-white">@2024</h5>
             </div>
-        </footer>
+        </footer>--%>
     </div>
 </body>
 </html>
