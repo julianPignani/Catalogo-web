@@ -19,6 +19,13 @@ namespace vista
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Validamos que tenga una session abierta para que pueda ingresar a ver los productos
+            if(Session["usuario"] == null)
+            {
+                Session.Add("error", "Debes loguearte para ingresar a esté campo.");
+                Response.Redirect("/Error.aspx", false);
+            }
+
             //Instanciamos la clase ArticuloNegocio para poder traernos la lista
             ArticuloNegocio negocio = new ArticuloNegocio();
             ListaArticulos = negocio.listarConSP();

@@ -15,6 +15,14 @@ namespace vista
         public bool FiltroAvanzado { get; set; }
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Validamos si es admin
+            if (!(Session["usuario"] != null && ((dominio.Usuario)Session["usuario"]).TipoUsarios == dominio.Usuario.TipoUsario.ADMIN))
+            {
+                Session.Add("error", "No tienes permisos para ingresar a esta pantalla. Necesitas nivel administrador.");
+                Response.Redirect("/Error.aspx");
+            } 
+
+
             FiltroAvanzado = chkAvanzado.Checked; //para no perder el valor de la variable a cuando recarga la pagina
             try
             {
