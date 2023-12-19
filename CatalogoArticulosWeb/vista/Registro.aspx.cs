@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
+using dominio;
+using negocio;
 
 namespace vista
 {
@@ -18,8 +20,12 @@ namespace vista
         {
             try
             {
+                Usuario user = new Usuario();
+                UsuarioNegocio negocio = new UsuarioNegocio();
+                
+                user.Email = txtEmail.Text;
                 //cuando capturamos los datos, validamos que el email contenga @ y .
-                string email = txtEmail.Text;
+                string email = user.Email;
 
                 //si no contiene @ o ., mostramos el error
                 if (!email.Contains("@") || !email.Contains("."))
@@ -32,11 +38,16 @@ namespace vista
                     //si contiene decimos q esta lbl no se muestre
                     lblError.Visible = false;
                 }
+
+                //capturo pass y llamo al metodo para insertar
+                user.Pass = txtPass.Text;
+                int id = negocio.Registrarse(user);
+                Response.Redirect("Login.aspx", false); // si se registra bien lo enviamos al login
             }
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx");
             }
         }

@@ -41,6 +41,29 @@ namespace negocio
             }
         }
 
+        public int Registrarse(Usuario user)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                //Esté storedProc. nos va a devovler un valor entero, en este caso el número de id con el que se guarda.
+                datos.setearStoredProcedure("registrarNuevo");
+                datos.setearParametros("@email", user.Email);
+                datos.setearParametros("@pass", user.Pass);
+                return datos.ejecutarAccionScalar();
+            }
+            
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
 
     }
 }

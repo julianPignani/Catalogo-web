@@ -22,7 +22,7 @@ namespace negocio
         {
             conexion = new SqlConnection("server=.\\SQLEXPRESS01; database= CATALOGO_DB; integrated security = true");
             comando = new SqlCommand();
-            
+
         }
         //Seteamos la query y le creamos la consulta
         public void setearQuery(string consulta)
@@ -72,6 +72,27 @@ namespace negocio
                 cerrarConexion();
             }
         }
+
+        //Metodo que va a ejecitar la query del insert pero que va a capturar el valor de un entero, en este caso el ID
+        public int ejecutarAccionScalar()
+        {
+            comando.Connection = conexion;
+            try
+            {
+                conexion.Open();
+                return int.Parse(comando.ExecuteScalar().ToString());
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                cerrarConexion();
+            }
+        }
+
         //Metodo para recibir los parametros de la consulta
         public void setearParametros(string nombre, object valor)
         {

@@ -37,6 +37,8 @@ namespace dominio
             Pass = pass;
             TipoUsarios = admin ? TipoUsario.ADMIN : TipoUsario.NORMAL;
         }
+        //constructor vacio
+        public Usuario() { }
 
 
     }
