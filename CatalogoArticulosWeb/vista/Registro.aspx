@@ -19,13 +19,16 @@
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" />
                         </div>
                         <div class="form-group m-3">
-                            <asp:Label runat="server" ID="lblError" ForeColor="Red" Visible="false"></asp:Label>
+                            <asp:Label runat="server" ID="lblErrorEmail" ForeColor="Red" Visible="false"></asp:Label>
                         </div>
                     </div>
                     <div class="form-group m-3">
                         <label for="lblPass">Password:</label>
                         <asp:TextBox runat="server" CssClass="form-control" ID="txtPass" type="password" />
                     </div>
+                    <div class="form-group m-3">
+                            <asp:Label runat="server" ID="lblErrorPass" ForeColor="Red" Visible="false"></asp:Label>
+                        </div>
                     <div class="form-group m-3">
                         <asp:Button Text="Registrarse" ID="btnRegistrarse" OnClick="btnRegistrarse_Click" CssClass="btn btn-primary btn-block" runat="server" />
                         <a href="Bienvenida.aspx">Cancelar</a>

@@ -24,25 +24,37 @@ namespace vista
                 UsuarioNegocio negocio = new UsuarioNegocio();
                 
                 user.Email = txtEmail.Text;
+                user.Pass = txtPass.Text;
                 //cuando capturamos los datos, validamos que el email contenga @ y .
                 string email = user.Email;
 
                 //si no contiene @ o ., mostramos el error
                 if (!email.Contains("@") || !email.Contains("."))
                 {
-                    lblError.Text = "El email debe contener '@' y '.'";
-                    lblError.Visible = true;
+                    lblErrorEmail.Text = "El email debe contener '@' y '.'";
+                    lblErrorEmail.Visible = true;
                 }
                 else
                 {
-                    //si contiene decimos q esta lbl no se muestre
-                    lblError.Visible = false;
-                }
+                    // Validar que la contraseña tenga al menos 8 caracteres
+                    string pass = user.Pass;
+                    if (pass.Length <= 8)
+                    {
+                        lblErrorPass.Text = "La contraseña debe contener 8 o más caracteres.";
+                        lblErrorPass.Visible = true;
+                    }
+                    else
+                    {
+                        // Ocultar el mensaje de error si ambas validaciones pasan
+                        lblErrorEmail.Visible = false;
+                        lblErrorPass.Visible = false;
 
-                //capturo pass y llamo al metodo para insertar
-                user.Pass = txtPass.Text;
-                int id = negocio.Registrarse(user);
-                Response.Redirect("Login.aspx", false); // si se registra bien lo enviamos al login
+                        // Llamo al método para insertar y lo guardo en la variable id
+                        int id = negocio.Registrarse(user);
+
+                        Response.Redirect("Login.aspx", false); // Si se registra bien, lo enviamos al login
+                    }
+                }
             }
             catch (Exception ex)
             {
