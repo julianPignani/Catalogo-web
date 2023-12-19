@@ -11,7 +11,7 @@ namespace vista
 {
 
 
-    public partial class Login
+    public partial class Registro
     {
 
         /// <summary>
@@ -24,6 +24,15 @@ namespace vista
         protected global::System.Web.UI.WebControls.TextBox txtEmail;
 
         /// <summary>
+        /// lblError control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblError;
+
+        /// <summary>
         /// txtPass control.
         /// </summary>
         /// <remarks>
@@ -33,12 +42,12 @@ namespace vista
         protected global::System.Web.UI.WebControls.TextBox txtPass;
 
         /// <summary>
-        /// btnIngresar control.
+        /// btnRegistrarse control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnIngresar;
+        protected global::System.Web.UI.WebControls.Button btnRegistrarse;
     }
 }

@@ -22,7 +22,7 @@ namespace vista
             UsuarioNegocio negocio = new UsuarioNegocio();
             try
             {
-                usuario = new Usuario(txtUser.Text, txtPass.Text, false); //le ponemos false, despúes si es diferente la DB lo pisa
+                usuario = new Usuario(txtEmail.Text, txtPass.Text, false); //le ponemos false, despúes si es diferente la DB lo pisa
                 if (negocio.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario); //Agregamos un usuario a la Session

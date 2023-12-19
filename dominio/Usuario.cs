@@ -16,16 +16,24 @@ namespace dominio
         }
 
         public int Id { get; set; }
-        public string User { get; set; }
+        public string Email { get; set; }
 
         public string Pass { get; set; }
+
+        public string Nombre { get; set; }
+
+        public string Apellido { get; set; }
+
+        public DateTime FechaNacimiento { get; set; }
+
+        public string ImagenPerfil { get; set; }
 
         public TipoUsario TipoUsarios { get; set; }
 
         //Creamos el constrctor
         public Usuario(string user, string pass, bool admin)
         {
-            User = user;
+            Email = user;
             Pass = pass;
             TipoUsarios = admin ? TipoUsario.ADMIN : TipoUsario.NORMAL;
         }

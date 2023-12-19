@@ -13,8 +13,8 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group m-3">
-                            <label for="lblUser" class="form-label">User</label>
-                            <asp:TextBox runat="server" CssClass="form-control" ID="txtUser" />
+                            <label for="lblUser" class="form-label">Email</label>
+                            <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" />
                         </div>
                         <div class="form-group m-3">
                             <label for="lblPass">Password:</label>
@@ -22,6 +22,7 @@
                         </div>
                         <div class="form-group m-3">
                             <asp:Button Text="Ingresar" ID="btnIngresar" Onclick="btnIngresar_Click" CssClass="btn btn-primary btn-block" runat="server" />
+                            <a href="Bienvenida.aspx">Cancelar</a>
                         </div>
                     </div>
                 </div>
