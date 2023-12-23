@@ -73,6 +73,7 @@
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="ListaArticulo.aspx" />
     <Content Include="Login.aspx" />
+    <Content Include="MiPerfil.aspx" />
     <Content Include="Registro.aspx" />
     <Content Include="VerDetalle.aspx" />
     <Content Include="Web.config" />
@@ -119,6 +120,13 @@
     </Compile>
     <Compile Include="Login.aspx.designer.cs">
       <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="MiPerfil.aspx.cs">
+      <DependentUpon>MiPerfil.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MiPerfil.aspx.designer.cs">
+      <DependentUpon>MiPerfil.aspx</DependentUpon>
     </Compile>
     <Compile Include="MyMaster.Master.cs">
       <DependentUpon>MyMaster.Master</DependentUpon>

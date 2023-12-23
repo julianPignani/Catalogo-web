@@ -23,10 +23,12 @@ namespace vista
             try
             {
                 usuario = new Usuario(txtEmail.Text, txtPass.Text, false); //le ponemos false, despúes si es diferente la DB lo pisa
+
+                //si se logeo correctamente
                 if (negocio.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario); //Agregamos un usuario a la Session
-                    Response.Redirect("Default.aspx", false); //El false es para capturar una ex de .net
+                    Response.Redirect("MiPerfil.aspx", false); //El false es para capturar una ex de .net
                 }
                 else
                 {
@@ -37,7 +39,7 @@ namespace vista
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
                 Response.Redirect("/Error.aspx", false);
             }
         }

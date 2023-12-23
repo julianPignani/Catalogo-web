@@ -8,7 +8,7 @@
         <%--<div class="row justify-content-center">--%>
             <div class="col-md-6 mt-auto d-flex flex-column">
                 <div class="card">
-                    <div class="card-header bg-primary text-white">
+                    <div class="card-header bg-success text-white">
                         <h3 class="text-center">Inicio de Sesión</h3>
                     </div>
                     <div class="card-body">
@@ -21,8 +21,8 @@
                             <asp:TextBox runat="server" CssClass="form-control" ID="txtPass" type="password" />
                         </div>
                         <div class="form-group m-3">
-                            <asp:Button Text="Ingresar" ID="btnIngresar" Onclick="btnIngresar_Click" CssClass="btn btn-primary btn-block" runat="server" />
-                            <a href="Bienvenida.aspx">Cancelar</a>
+                            <asp:Button Text="Ingresar" ID="btnIngresar" Onclick="btnIngresar_Click" CssClass="btn btn-success btn-block" runat="server" />
+                            <a href="Bienvenida.aspx" class="btn btn-danger">Cancelar</a>
                         </div>
                     </div>
                 </div>

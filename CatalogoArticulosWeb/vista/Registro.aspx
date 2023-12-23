@@ -31,7 +31,7 @@
                         </div>
                     <div class="form-group m-3">
                         <asp:Button Text="Registrarse" ID="btnRegistrarse" OnClick="btnRegistrarse_Click" CssClass="btn btn-primary btn-block" runat="server" />
-                        <a href="Bienvenida.aspx">Cancelar</a>
+                        <a href="Bienvenida.aspx" class="btn btn-danger ">Cancelar</a>
                     </div>
                 </div>
             </div>

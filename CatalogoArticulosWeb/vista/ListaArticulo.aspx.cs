@@ -16,8 +16,9 @@ namespace vista
         protected void Page_Load(object sender, EventArgs e)
         {
             //Validamos si es admin
-            if (!(Session["usuario"] != null && ((dominio.Usuario)Session["usuario"]).TipoUsarios == dominio.Usuario.TipoUsario.ADMIN))
-            {
+            Usuario usuarioEnSesion = Session["usuario"] as Usuario;
+            if (usuarioEnSesion != null && !Seguridad.esAdmin(usuarioEnSesion))
+                {
                 Session.Add("error", "No tienes permisos para ingresar a esta pantalla. Necesitas nivel administrador.");
                 Response.Redirect("/Error.aspx");
             } 

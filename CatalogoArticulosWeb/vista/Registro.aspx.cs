@@ -47,7 +47,7 @@ namespace vista
                     {
                         // Ocultar el mensaje de error si ambas validaciones pasan
                         lblErrorEmail.Visible = false;
-                        lblErrorPass.Visible = false;
+                        lblErrorPass.Visible = false; 
 
                         // Llamo al método para insertar y lo guardo en la variable id
                         int id = negocio.Registrarse(user);

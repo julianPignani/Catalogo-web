@@ -9,6 +9,25 @@
     <title>Mi Web</title>
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
+
+    <style>
+        #login-link {
+            color: green; /* Color por defecto del texto */
+        }
+
+            #login-link:hover {
+                color: white !important; /* Color del texto al pasar el mouse */
+                background-color: green !important; /* Color del fondo al pasar el mouse */
+            }
+            #registrate-link {
+                color: blue;
+            }
+            #registrate-link:hover {
+                color : white !important;
+                background-color: blue !important;
+            }
+    </style>
+
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container-fluid text-center mt-4 bg-dark text-white">
@@ -19,25 +38,31 @@
         <form id="form1" runat="server">
             <nav class="navbar bg-transparent navbar-expand-lg border-body shadow" data-bs-theme="dark">
                 <div class="container-fluid p-0">
-                    <a class="nav-link text-primary btn btn-primary m-1 fw-bold fs-5 m-2" style="text-decoration: underline; font-size: 1.4em;"  href="Bienvenida.aspx">Home</a>
+                    <a id="registrate-link" class="nav-link text-primary btn btn-primary  fw-bold fs-5 m-2"  href="Bienvenida.aspx">Home</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <li class="nav-item">
-                                <a class="nav-link btn btn-outline-dark  active fw-bold text-white fs-5 m-2" aria-current="page" href="Default.aspx">Nuestros Productos</a>
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="Default.aspx">Nuestros Productos</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link btn btn-outline-dark  active fw-bold text-white fs-5 m-2" aria-current="page" href="ListaArticulo.aspx">Lista de Articulos</a>
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="ListaArticulo.aspx">Lista de Articulos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="Favorito.aspx">Favoritos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="MiPerfil.aspx">Mi Perfil</a>
                             </li>
                         </ul>
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link text-success btn btn-primary m-1 fw-bold fs-5 m-2" href="Login.aspx">Login</a>
+                                <a id="login-link" class="nav-link text-success btn btn-primary m-1 fw-bold fs-5 m-2" href="Login.aspx">Login</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-primary btn btn-primary m-1 fw-bold fs-5 m-2" href="Registro.aspx">Registrate</a>
+                                <a id="registrate-link" class="nav-link text-primary btn btn-primary m-1 fw-bold fs-5 m-2" href="Registro.aspx">Registrate</a>
                             </li>
                         </ul>
                     </div>
