@@ -29,5 +29,19 @@ namespace vista
             }
 
         }
+
+        protected void btnSalir_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                Session.Clear();
+                Response.Redirect("Login.aspx", false);
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

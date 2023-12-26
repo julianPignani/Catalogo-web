@@ -19,13 +19,20 @@
                 color: white !important; /* Color del texto al pasar el mouse */
                 background-color: green !important; /* Color del fondo al pasar el mouse */
             }
-            #registrate-link {
-                color: blue;
-            }
+
+        #registrate-link {
+            color: blue;
+        }
+
             #registrate-link:hover {
-                color : white !important;
+                color: white !important;
                 background-color: blue !important;
             }
+
+        #btnSalir:hover {
+            color: white !important;
+            background-color: red;
+        }
     </style>
 
 </head>
@@ -38,7 +45,7 @@
         <form id="form1" runat="server">
             <nav class="navbar bg-transparent navbar-expand-lg border-body shadow" data-bs-theme="dark">
                 <div class="container-fluid p-0">
-                    <a id="registrate-link" class="nav-link text-primary btn btn-primary  fw-bold fs-5 m-2"  href="Bienvenida.aspx">Home</a>
+                    <a id="registrate-link" class="nav-link text-primary btn btn-primary  fw-bold fs-5 m-2" href="Bienvenida.aspx">Home</a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -57,12 +64,33 @@
                                 <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="MiPerfil.aspx">Mi Perfil</a>
                             </li>
                         </ul>
-                        <ul class="navbar-nav">
+                        <% if (!negocio.Seguridad.sesionActiva(Session["usuario"]))
+                            {%>
+
+                        <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
                                 <a id="login-link" class="nav-link text-success btn btn-primary m-1 fw-bold fs-5 m-2" href="Login.aspx">Login</a>
                             </li>
                             <li class="nav-item">
                                 <a id="registrate-link" class="nav-link text-primary btn btn-primary m-1 fw-bold fs-5 m-2" href="Registro.aspx">Registrate</a>
+                            </li>
+                        </ul>
+                        <% 
+                            }
+                            else
+                            {
+                        %>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <asp:Button Text="Salir" ID="btnSalir" runat="server" CssClass=" btn btn-outline-danger m-1 fw-bold fs-5 " OnClick="btnSalir_Click" />
+                            </li>
+                        </ul>
+                        <%} %>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <asp:Image ImageUrl="https://www.nicepng.com/png/detail/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" 
+                                    ID="imgPerfil" runat="server"
+                                    Style="height: 60px; width: 60px; border-radius: 50%;"/>
                             </li>
                         </ul>
                     </div>

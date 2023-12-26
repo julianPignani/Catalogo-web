@@ -50,9 +50,12 @@ namespace vista
                         lblErrorPass.Visible = false; 
 
                         // Llamo al método para insertar y lo guardo en la variable id
-                        int id = negocio.Registrarse(user);
+                        user.Id = negocio.Registrarse(user);
 
-                        Response.Redirect("Login.aspx", false); // Si se registra bien, lo enviamos al login
+                        //cargamos en session los datos del usuario
+                        Session.Add("usuario", user); 
+
+                        Response.Redirect("Default.aspx", false); // Si se registra bien, lo enviamos al login
                     }
                 }
             }
