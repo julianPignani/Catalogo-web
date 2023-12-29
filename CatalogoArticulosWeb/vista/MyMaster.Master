@@ -88,9 +88,7 @@
                         <%} %>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <asp:Image ImageUrl="https://www.nicepng.com/png/detail/202-2022264_usuario-annimo-usuario-annimo-user-icon-png-transparent.png" 
-                                    ID="imgPerfil" runat="server"
-                                    Style="height: 60px; width: 60px; border-radius: 50%;"/>
+                                <asp:Image  ID="imgPerfil" runat="server" Style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"/>
                             </li>
                         </ul>
                     </div>

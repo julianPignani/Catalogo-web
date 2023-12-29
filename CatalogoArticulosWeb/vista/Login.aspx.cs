@@ -28,7 +28,7 @@ namespace vista
                 if (negocio.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario); //Agregamos un usuario a la Session
-                    Response.Redirect("MiPerfil.aspx", false); //El false es para capturar una ex de .net
+                    Response.Redirect("Bienvenida.aspx", false); //El false es para capturar una ex de .net
                 }
                 else
                 {

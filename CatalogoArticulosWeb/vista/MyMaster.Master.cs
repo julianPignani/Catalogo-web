@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using negocio;
+using dominio;
 
 namespace vista
 {
@@ -21,11 +22,24 @@ namespace vista
                         Response.Redirect("Login.aspx", false);
 
                 }
+
+                //Validamos para que la imagen quede guardada en el avatar  en todas las vistas mientras la session este abierta.
+                if (Seguridad.sesionActiva(Session["usuario"]))
+                {
+
+                    //verificamos si la img en la DB es null.
+                    imgPerfil.ImageUrl = "~/Images/" + ((Usuario)Session["usuario"]).ImagenPerfil;
+                }
+                else
+                {
+                    //Si la sesión no está activa, tambien asignamos la url por defecto.
+                    imgPerfil.ImageUrl = "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                throw ex;
             }
 
         }
