@@ -86,7 +86,8 @@ namespace negocio
             {
 
                 datos.setearQuery("Update USERS set ImagenPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @fechaNac  where Id = @id");
-                datos.setearParametros("@imagen", user.ImagenPerfil != null ? user.ImagenPerfil : ""); //si no guarda una  img q guarde una cadena vacia
+                //datos.setearParametros("@imagen", user.ImagenPerfil != null ? user.ImagenPerfil : (object)DBNull.Value); //si no guarda una  img q guarde un null.
+                datos.setearParametros("@imagen", (object)user.ImagenPerfil ?? DBNull.Value); //(Operador para nulls), podemos usar esta forma o la de arriba. 
                 datos.setearParametros("@nombre", user.Nombre);
                 datos.setearParametros("@apellido", user.Apellido);
                 datos.setearParametros("@fechaNac", user.FechaNacimiento);
