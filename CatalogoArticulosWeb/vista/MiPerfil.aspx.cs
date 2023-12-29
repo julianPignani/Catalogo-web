@@ -13,19 +13,46 @@ namespace vista
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            
 
             try
             {
-                //Validamos si ya hay un usuario conectado en session
-                    if(!Seguridad.sesionActiva(Session["usuario"]))
-                    Response.Redirect("Login.aspx", false);
+                //Validamos,si el usuario ya tiene el perfil cargado, le mostramos los datos que guardó.
+                if (!IsPostBack)
+                {
+                    if (Seguridad.sesionActiva(Session["usuario"]))
+                    {
+                        Usuario user = (Usuario)Session["usuario"];
+                        txtEmail.Text = user.Email;
+                        txtNombre.Text = user.Nombre;
+                        txtApellido.Text = user.Apellido;
+                        txtFechaNac.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
+                        if (!string.IsNullOrEmpty(user.ImagenPerfil))
+                            imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
+
+                        
+                    }
+
+
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                Session.Add("error", ex.ToString());
             }
+
+
+            /* try
+             {
+                 //Validamos si ya hay un usuario conectado en session
+                     if(!Seguridad.sesionActiva(Session["usuario"]))
+                     Response.Redirect("Login.aspx", false);
+             }
+             catch (Exception)
+             {
+
+                 throw;
+             }*/
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -39,23 +66,28 @@ namespace vista
                 UsuarioNegocio negocio = new UsuarioNegocio();
 
                 //ESCRIBIR IMG
-                //Guardamos la ruta de la imagen en la carpeta con el nombre + el id del us.
-               
-                string ruta = Server.MapPath("./Images/");
-                txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
+                //Guardamos la ruta de la imagen en la carpeta con el nombre + el id del us. 
+                if (txtImagen.PostedFile.FileName != "") //(si no hay nada seleccionado significa que esta vacio, sino capturamos la ruta)
+                {
+                    string ruta = Server.MapPath("./Images/");
+                    txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
 
-                //Guardamos la imagen en la DB
-                user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
+                    //Guardamos la imagen en la DB
+                    user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
+
+                }
+                //Capturamos los demas datos y llamamos al método
                 user.Nombre = txtNombre.Text;
                 user.Apellido = txtApellido.Text;
+                user.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
                 negocio.actualizar(user);
 
                 //LEER IMG
                 //para poder acceder a la master y buscar el id de la imagen el el aspx
-                Image img =  (Image)Master.FindControl("imgPerfil");
+                Image img = (Image)Master.FindControl("imgPerfil");
                 img.ImageUrl = "~/Images/" + user.ImagenPerfil;
 
-                
+                Response.Redirect("MiPerfil.aspx", false);
             }
             catch (Exception ex)
             {
@@ -75,7 +107,7 @@ namespace vista
 
             btnGuardar.Visible = true;
             btnModificar.Visible = false;
-            
+
         }
     }
 }

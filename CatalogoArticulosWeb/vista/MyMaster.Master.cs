@@ -15,6 +15,7 @@ namespace vista
         {
             try
             {
+
                 //Validamos si ya existe un usuario en session o no, y validamos en que pantallas puede ver el usuario sin estar logueado.
                 if (!(Page is Login || Page is Bienvenida || Page is Registro) && !Seguridad.sesionActiva(Session["usuario"]))
                 {
@@ -26,7 +27,6 @@ namespace vista
                 //Validamos para que la imagen quede guardada en el avatar  en todas las vistas mientras la session este abierta.
                 if (Seguridad.sesionActiva(Session["usuario"]))
                 {
-
                     //verificamos si la img en la DB es null.
                     imgPerfil.ImageUrl = "~/Images/" + ((Usuario)Session["usuario"]).ImagenPerfil;
                 }

@@ -14,7 +14,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Select id, ImagenPerfil , tipouser from USERS where email = @email AND pass = @pass");
+                datos.setearQuery("Select id, email, pass ,ImagenPerfil, nombre, apellido ,fechaNacimiento ,tipouser from USERS where email = @email AND pass = @pass");
                 datos.setearParametros("@email", usuario.Email);
                 datos.setearParametros("@pass", usuario.Pass);
 
@@ -25,9 +25,15 @@ namespace negocio
                 {
                     usuario.Id = (int)datos.Lector["id"];
 
-                    //Validamos la imagen, si es diferente a null, entonces guardamos la imagen
+                    //Validamos la imagen, si es diferente a null, entonces guardamos la imagen, los demás los validamos porq son datos no requeridos y pueden generar error.
                     if (!(datos.Lector["ImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["ImagenPerfil"];
+                    if(!(datos.Lector["nombre"] is DBNull))
+                        usuario.Nombre = (string)datos.Lector["nombre"];
+                    if(!(datos.Lector["apellido"] is DBNull))
+                        usuario.Apellido = (string)datos.Lector["apellido"];
+                    if(!(datos.Lector["fechaNacimiento"] is DBNull))
+                        usuario.FechaNacimiento = DateTime.Parse(datos.Lector["fechaNacimiento"].ToString());
 
                     usuario.TipoUsarios = (int)datos.Lector["TipoUser"] == 2 ? Usuario.TipoUsario.ADMIN : Usuario.TipoUsario.NORMAL;
 
@@ -79,10 +85,11 @@ namespace negocio
             try
             {
 
-                datos.setearQuery("Update USERS set ImagenPerfil = @imagen, Nombre = @nombre, Apellido = @apellido  where Id = @id");
-                datos.setearParametros("@imagen", user.ImagenPerfil);
+                datos.setearQuery("Update USERS set ImagenPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @fechaNac  where Id = @id");
+                datos.setearParametros("@imagen", user.ImagenPerfil != null ? user.ImagenPerfil : ""); //si no guarda una  img q guarde una cadena vacia
                 datos.setearParametros("@nombre", user.Nombre);
                 datos.setearParametros("@apellido", user.Apellido);
+                datos.setearParametros("@fechaNac", user.FechaNacimiento);
                 datos.setearParametros("@id", user.Id);
 
                 datos.ejecutarAccion();
