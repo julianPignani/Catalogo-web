@@ -45,6 +45,7 @@ namespace vista
         {
             //Capturamos el argumento que viene a través del btnVerDetalle con el Id.
             string valor = ((Button)sender).CommandArgument;
+            Response.Redirect("VerDetalle.aspx", false);
         }
 
     }

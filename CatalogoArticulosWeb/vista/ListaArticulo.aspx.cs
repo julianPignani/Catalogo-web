@@ -18,10 +18,10 @@ namespace vista
             //Validamos si es admin
             Usuario usuarioEnSesion = Session["usuario"] as Usuario;
             if (usuarioEnSesion != null && !Seguridad.esAdmin(usuarioEnSesion))
-                {
+            {
                 Session.Add("error", "No tienes permisos para ingresar a esta pantalla. Necesitas nivel administrador.");
                 Response.Redirect("/Error.aspx");
-            } 
+            }
 
 
             FiltroAvanzado = chkAvanzado.Checked; //para no perder el valor de la variable a cuando recarga la pagina
@@ -36,7 +36,8 @@ namespace vista
             catch (Exception ex)
             {
 
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -79,26 +80,27 @@ namespace vista
                 {
                     ddlCriterio.Items.Add("Contiene ");
                     ddlCriterio.Items.Add("Comienza con ");
-                    
+
                 }
                 else if (ddlCampo.SelectedItem.ToString() == "Marca")
                 {
                     ddlCriterio.Items.Add("Contiene");
                     ddlCriterio.Items.Add("Comienza con ");
-                    
+
 
                 }
                 else
                 {
                     ddlCriterio.Items.Add("Contiene");
                     ddlCriterio.Items.Add("Comienza con ");
-                    
+
 
                 }
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
 
             }
         }
@@ -117,7 +119,8 @@ namespace vista
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
 
             }
         }

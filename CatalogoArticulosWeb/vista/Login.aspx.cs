@@ -32,7 +32,7 @@ namespace vista
                 }
                 else
                 {
-                    Session.Add("error", "Usuario o Contraseña incorrectos");
+                    Session.Add("error", "Usuario o Contraseña incorrectos!!");
                     Response.Redirect("/Error.aspx", false);
                 }
             }

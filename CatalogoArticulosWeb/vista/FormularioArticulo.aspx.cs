@@ -70,9 +70,8 @@ namespace vista
             catch (Exception ex)
             {
 
-                Session.Add("error", ex); //Capturamos el error y lo guardamos en una session
-                throw;
-                //redireccion pantalla error
+                Session.Add("error", ex.ToString()); //Capturamos el error y lo guardamos en una session
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -104,7 +103,7 @@ namespace vista
                 nuevo.Descripcion = txtDescripcion.Text;
                 nuevo.ImagenUrl = txtImagenUrl.Text;
 
-                //Validamos si agregamos o modificamos el Articulo- si viene con un id modifica, sino agregamos
+                //Validamos si agregamos o modificamos el Articulo - si viene con un id modifica, sino agregamos
                 if (Request.QueryString["id"] != null)
                 {
                     nuevo.Id = int.Parse(txtId.Text); //le tengo que asignar el id para que sepa que articulo modificar
@@ -117,9 +116,8 @@ namespace vista
             }
             catch (Exception ex)
             {
-                Session.Add("error", ex);//Capturamos el error y lo guardamos en una session
-                throw;
-                //redireccion pantalla error
+                Session.Add("error", ex.ToString());//Capturamos el error y lo guardamos en una session
+                Response.Redirect("Error.aspx", false);
             }
         }
 
@@ -141,9 +139,9 @@ namespace vista
             }
             catch (Exception ex)
             {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
 
-                Session.Add("error", ex);
-                throw;
             }
         }
     }

@@ -17,7 +17,7 @@ namespace vista
             {
 
                 //Validamos si ya existe un usuario en session o no, y validamos en que pantallas puede ver el usuario sin estar logueado.
-                if (!(Page is Login || Page is Bienvenida || Page is Registro) && !Seguridad.sesionActiva(Session["usuario"]))
+                if (!(Page is Login || Page is Bienvenida || Page is Registro || Page is Error) && !Seguridad.sesionActiva(Session["usuario"]))
                 {
                     if (!Seguridad.sesionActiva(Session["usuario"]))
                         Response.Redirect("Login.aspx", false);
@@ -39,7 +39,8 @@ namespace vista
             catch (Exception ex)
             {
 
-                throw ex;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
 
         }
@@ -53,8 +54,8 @@ namespace vista
             }
             catch (Exception ex)
             {
-
-                throw ex;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

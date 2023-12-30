@@ -28,31 +28,16 @@ namespace vista
                         txtFechaNac.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
                         if (!string.IsNullOrEmpty(user.ImagenPerfil))
                             imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
-
-                        
+  
                     }
-
-
                 }
             }
             catch (Exception ex)
             {
 
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
-
-
-            /* try
-             {
-                 //Validamos si ya hay un usuario conectado en session
-                     if(!Seguridad.sesionActiva(Session["usuario"]))
-                     Response.Redirect("Login.aspx", false);
-             }
-             catch (Exception)
-             {
-
-                 throw;
-             }*/
         }
 
         protected void btnGuardar_Click(object sender, EventArgs e)
@@ -91,8 +76,9 @@ namespace vista
             }
             catch (Exception ex)
             {
-
                 Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+
             }
         }
 
