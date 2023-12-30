@@ -14,11 +14,11 @@
                     <div class="card-body">
                         <div class="form-group m-3">
                             <label for="lblUser" class="form-label">Email</label>
-                            <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" />
+                            <asp:TextBox runat="server" CssClass="form-control" ID="txtEmail" REQUIRED />
                         </div>
                         <div class="form-group m-3">
                             <label for="lblPass">Password:</label>
-                            <asp:TextBox runat="server" CssClass="form-control" ID="txtPass" type="password" />
+                            <asp:TextBox runat="server" CssClass="form-control" ID="txtPass" type="password" REQUIRED/>
                         </div>
                         <div class="form-group m-3">
                             <asp:Button Text="Ingresar" ID="btnIngresar" Onclick="btnIngresar_Click" CssClass="btn btn-success btn-block" runat="server" />
