@@ -11,8 +11,8 @@
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button type="button" data-bs-target="#carouselExampleDark" data-bs-slide-to="2" aria-label="Slide 3"></button>
         </div>
-        <div class="carousel-inner">
-            <div class="carousel-item active" data-bs-interval="10000">
+        <div class="carousel-inner ">
+            <div class="carousel-item active" data-bs-interval="10000" >
                 <img src="https://www.sony.com.ar/image/7179b15fa957563d895189432c5d11ab?fmt=png-alpha&wid=960" class="d-block mx-auto img-fluid" style="width: 1000px; height: 600px;" alt="Auriculares Sony">
                 <div class="carousel-caption d-flex flex-column justify-content-end align-items-start text-danger">
                     <h5 class="mb-0">Auriculares Sony</h5>

@@ -11,6 +11,15 @@
     </asp:ContentPlaceHolder>
 
     <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #000; /* Color del texto */
+            margin: 0; /* Eliminar márgenes predeterminados del cuerpo */
+            padding-bottom: 60px; /* Espacio para el footer */
+        }
+
         #login-link {
             color: green; /* Color por defecto del texto */
         }
@@ -33,12 +42,22 @@
             color: white !important;
             background-color: red;
         }
+
+        #titulo {
+            font-family: 'Lobster', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
     </style>
 
 </head>
 <body class="d-flex flex-column min-vh-100">
     <div class="container-fluid text-center mt-4 bg-dark text-white">
-        <h1 class="display-4">Bienvenidos a TegnoMundo</h1>
+        <h1 class="display-4" id="titulo">¡¡Bienvenidos a TegnoMundo!!</h1>
         <p class="lead font-bold fs-4">Encuentra los mejores productos para tu entretenimiento.</p>
     </div>
     <div class="p-3 mb-2 bg-warning-subtle text-emphasis-warning flex-grow-1">
@@ -88,7 +107,7 @@
                         <%} %>
                         <ul class="navbar-nav ml-auto">
                             <li class="nav-item">
-                                <asp:Image  ID="imgPerfil" runat="server" Style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;"/>
+                                <asp:Image ID="imgPerfil" runat="server" Style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;" />
                             </li>
                         </ul>
                     </div>
@@ -99,14 +118,12 @@
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
+            <footer id="footer" class="container-fluid text-center mt-4 mb-0 bg-dark text-white " style="padding: 1rem; text-align: center; position: fixed; bottom: 0; width: 100%;">
+                <div class="align-content-center">
+                    <p>@2024 - Desarrollado por Julián Pignani</p>
+                </div>
+            </footer>
         </form>
-        <%--<footer class="container-fluid text-center mt-4 mb-0 bg-dark text-white">
-            <div class="align-content-center">
-                <h5 class="text-white">Julián Pignani</h5>
-                <h5 class="text-white">Desarrolador .Net</h5>
-                <h5 class="text-white">@2024</h5>
-            </div>
-        </footer>--%>
     </div>
 </body>
 </html>
