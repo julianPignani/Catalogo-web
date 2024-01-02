@@ -11,7 +11,17 @@ namespace vista
     {
         protected void Application_Start(object sender, EventArgs e)
         {
-
+            //Otra forma de validar el RequiredFieldValidator para que nos deje utilizarlo, yo utilice la forma de desactivarlo en Web.Config
+           /* string JQueryVer = "1.11.3";
+            ScriptManager.ScriptResourceMapping.AddDefinition("jquery", new ScriptResourceDefinition
+            {
+                Path = "~/js/jquery-" + JQueryVer + ".min.js",
+                DebugPath = "~/js/jquery-" + JQueryVer + ".js",
+                CdnPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-" + JQueryVer + ".min.js",
+                CdnDebugPath = "http://ajax.aspnetcdn.com/ajax/jQuery/jquery-" + JQueryVer + ".js",
+                CdnSupportsSecureConnection = true,
+                LoadSuccessExpression = "Window.jQuery"
+            }); */
         }
 
         //Capturamos cualquier Exception que pueda llegar a generar la aplicacion y no la estamos capturando en otra parte.

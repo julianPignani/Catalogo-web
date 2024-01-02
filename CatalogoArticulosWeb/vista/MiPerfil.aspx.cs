@@ -16,6 +16,7 @@ namespace vista
 
             try
             {
+
                 //Validamos,si el usuario ya tiene el perfil cargado, le mostramos los datos que guardó.
                 if (!IsPostBack)
                 {
@@ -93,6 +94,11 @@ namespace vista
 
             btnGuardar.Visible = true;
             btnModificar.Visible = false;
+
+            //Validamos que las validaciones del RequiredFieldValidator sean correctas, esto evita que corra toda la acción y luego muestre si está mal.
+            Page.Validate();
+            if (!Page.IsValid) //si no es valida, que nos muestre él error. Sino sigue con la carga de datos
+                return;
 
         }
     }

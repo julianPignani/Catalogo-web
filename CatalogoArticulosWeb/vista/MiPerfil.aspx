@@ -1,6 +1,12 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MyMaster.Master" AutoEventWireup="true" CodeBehind="MiPerfil.aspx.cs" Inherits="vista.MiPerfil" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+    <style>
+        .validacion{
+            color:red;
+            font-size: 15px;
+        }
+    </style>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
     <h2>Mi Perfil</h2>
@@ -13,14 +19,17 @@
             <div class="mb-3">
                 <label class="form-label">Nombre</label>
                 <asp:TextBox cssClass="form-control" ID="txtNombre" runat="server" Enabled="false" />
+                <asp:RequiredFieldValidator ErrorMessage="El campo es requerido." ControlToValidate="txtNombre" CssClass="validacion" runat="server" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Apellido</label>
                 <asp:TextBox cssClass="form-control" ID="txtApellido" runat="server" Enabled="false"/>
+                <asp:RequiredFieldValidator ErrorMessage="El campo es requerido." CssClass="validacion" ControlToValidate="txtApellido" runat="server" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Fecha de Nacimiento</label>
                 <asp:TextBox cssClass="form-control" ID="txtFechaNac" runat="server" Enabled="false" TextMode="Date" />
+                <asp:RequiredFieldValidator ErrorMessage="El campo es requerido" CssClass="validacion" ControlToValidate="txtFechaNac" runat="server" />
             </div>
         </div>
 
