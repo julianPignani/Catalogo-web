@@ -17,7 +17,7 @@
             flex-direction: column;
             color: #000; /* Color del texto */
             margin: 0; /* Eliminar márgenes predeterminados del cuerpo */
-            padding-bottom: 60px; /* Espacio para el footer */
+            padding-bottom: 0px; /* Espacio para el footer */
         }
 
         #login-link {
@@ -118,8 +118,8 @@
                 <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                 </asp:ContentPlaceHolder>
             </div>
-            <footer id="footer" class="container-fluid text-center mt-4 mb-0 bg-dark text-white " style="padding: 1rem; text-align: center; position: fixed; bottom: 0; width: 100%;">
-                <div class="align-content-center">
+            <footer id="footer" class="container-fluid text-center mt-4 mb-0 bg-dark text-white " style="padding: 0.1rem; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%;">
+                <div class=" d-flex align-items-center justify-content-center">
                     <p>@2024 - Desarrollado por Julián Pignani</p>
                 </div>
             </footer>

@@ -45,6 +45,11 @@ namespace vista
         {
             try
             {
+                //Validamos que las validaciones del RequiredFieldValidator sean correctas, esto evita que corra toda la acción y luego muestre si está mal.
+                Page.Validate();
+                if (!Page.IsValid) //si no es valida, que nos muestre él error. Sino sigue con la carga de datos
+                    return;
+
                 //llamamos al usuario para guardar la foto con el nombre  el id del usuario
                 Usuario user = (Usuario)Session["usuario"];
 
@@ -95,10 +100,7 @@ namespace vista
             btnGuardar.Visible = true;
             btnModificar.Visible = false;
 
-            //Validamos que las validaciones del RequiredFieldValidator sean correctas, esto evita que corra toda la acción y luego muestre si está mal.
-            Page.Validate();
-            if (!Page.IsValid) //si no es valida, que nos muestre él error. Sino sigue con la carga de datos
-                return;
+
 
         }
     }
