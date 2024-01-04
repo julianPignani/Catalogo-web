@@ -33,7 +33,8 @@
                     <div class="card h-100 d-flex flex-column">
                         <img src="<%#Eval("ImagenUrl")%>" class="card-img-top img-fluid w-100 object-fit-cover" alt="...">
                         <div class="card-body text-center   ">
-                            <h5 class="card-title"><%#Eval("Nombre")%></h5>
+                            <h4 class="card-title"><%#Eval("Nombre")%></h4>
+                            <p class="card-text" style="color: red; font-weight: bold;"><%#Eval("Marca") %></p>
                             <p class="card-text"><%#Eval("Descripcion")  %></p>
                             <%--<a href="VerDetalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">Ver Detalle</a>--%>  <%--otra forma de poder hacerlo--%>
                             <asp:Button Text="Ver detalle" CssClass="btn btn-primary" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloId" OnClick="btnVerDetalle_Click" />

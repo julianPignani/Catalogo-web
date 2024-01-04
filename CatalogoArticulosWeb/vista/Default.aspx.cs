@@ -44,8 +44,8 @@ namespace vista
         protected void btnVerDetalle_Click(object sender, EventArgs e)
         {
             //Capturamos el argumento que viene a través del btnVerDetalle con el Id.
-            string valor = ((Button)sender).CommandArgument;
-            Response.Redirect("VerDetalle.aspx", false);
+            string id = ((Button)sender).CommandArgument;
+            Response.Redirect("VerDetalle.aspx?id=" + Server.UrlEncode(id), false);//Server.UrlEncode para garantizar que el id se transmita de manera segura a través de la URL.
         }
 
     }
