@@ -15,7 +15,7 @@
         </div>
     </div>
     <div class="mb-3">
-        <asp:CheckBox Text=" Filtrar Productos." CssClass="form-check-input margin-left: 10px;" ID="chkAvanzado" AutoPostBack="true"  OnCheckedChanged="chkAvanzado_CheckedChanged" runat="server" />
+        <asp:CheckBox Text=" Filtrar Productos." CssClass="form-check-input margin-left: 10px;" ID="chkAvanzado" AutoPostBack="true" OnCheckedChanged="chkAvanzado_CheckedChanged" runat="server" />
     </div>
 
     <%if (FiltroAvanzado)
@@ -49,27 +49,29 @@
             <div class="col-3">
                 <div class="mb-3">
                     <div>
-                        <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-primary" runat="server"  OnClick="btnBuscar_Click" />
+                        <asp:Button Text="Buscar" ID="btnBuscar" CssClass="btn btn-primary" runat="server" OnClick="btnBuscar_Click" />
                     </div>
                 </div>
             </div>
         </div>
     </div>
     <% } %>
-    <asp:GridView ID="dgvArticulos" CssClass="table table-bordered text-center" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged"
-        OnPageIndexChanging="dgvArticulos_PageIndexChanging" AllowPaging="true" PageSize="5" runat="server">
-        <Columns>
-            <asp:BoundField HeaderText="id" DataField="Id" Visible="false" />
-            <asp:BoundField HeaderText="Código" DataField="Codigo" />
-            <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
-            <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
-            <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
-            <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
-            <asp:BoundField HeaderText="Precio" DataField="Precio" />
-            <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="Modificar o Eliminar" />
-        </Columns>
-    </asp:GridView>
-    <div>
-        <a href="FormularioArticulo.aspx" class="btn btn-primary">Agregar</a>
+    <div style="margin-bottom: 80px;">
+        <asp:GridView ID="dgvArticulos" CssClass="table table-bordered text-center" DataKeyNames="Id" AutoGenerateColumns="false" OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged"
+            OnPageIndexChanging="dgvArticulos_PageIndexChanging" AllowPaging="true" PageSize="5" runat="server">
+            <Columns>
+                <asp:BoundField HeaderText="id" DataField="Id" Visible="false" />
+                <asp:BoundField HeaderText="Código" DataField="Codigo" />
+                <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
+                <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
+                <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
+                <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
+                <asp:BoundField HeaderText="Precio" DataField="Precio" />
+                <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="Modificar o Eliminar" />
+            </Columns>
+        </asp:GridView>
+        <div>
+            <a href="FormularioArticulo.aspx" style="z-index: 1000;" class="btn btn-primary">Agregar</a>
+        </div>
     </div>
 </asp:Content>
