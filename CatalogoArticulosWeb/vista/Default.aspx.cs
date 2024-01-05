@@ -48,5 +48,14 @@ namespace vista
             Response.Redirect("VerDetalle.aspx?id=" + Server.UrlEncode(id), false);//Server.UrlEncode para garantizar que el id se transmita de manera segura a través de la URL.
         }
 
+        protected void ddlCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected void btnBuscar_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
