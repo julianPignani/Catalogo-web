@@ -100,7 +100,22 @@ namespace vista
         //actualiza la pagina despues de filtrar
         protected void btnActualizar_Click(object sender, EventArgs e)
         {
+            try
+            {
+                ddlCriterio.Items.Clear();
+                txtFiltrar.Text = ""; //dejamos el campo vacio.
 
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                repRepetidor.DataSource = negocio.listarConSP();
+                repRepetidor.DataBind();
+
+            }
+            catch (Exception ex)
+            {
+
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
+            }
         }
     }
 }
