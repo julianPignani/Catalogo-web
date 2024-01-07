@@ -80,6 +80,7 @@ namespace vista
             }
         }
 
+        //Evento para filtrar
         protected void btnBuscar_Click(object sender, EventArgs e)
         {
             try
@@ -94,6 +95,12 @@ namespace vista
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
             }
+        }
+
+        //actualiza la pagina despues de filtrar
+        protected void btnActualizar_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -6,14 +6,14 @@
     
 
     
-        <ContentTemplate>
+        
             <div class="container">
-                <div class="container text-center mt-5">
+                <div class="container text-center mt-5 mb-3">
                     <h1 class="display-4  text-primary m-3"><u>Explora Nuestro Catálogo de Artículos</u></h1>
                 </div>
             </div>
 
-            <div class="row justify-content-center mb-3">
+            <div class="row justify-content-center mb-3" style="margin-left: 75px;">
                 <div class="col-md-3">
                     <asp:Label Text="Campo" ID="lblCampo" Style="color: black; font-weight: bold;" runat="server" />
                     <asp:DropDownList runat="server" CssClass="form-control" ID="ddlCampo" OnSelectedIndexChanged="ddlCampo_SelectedIndexChanged" AutoPostBack="true">
@@ -31,11 +31,13 @@
                     <asp:Label Text="Filtro" runat="server" ID="lblFiltro" Style="color: black; font-weight: bold;" />
                     <asp:TextBox runat="server" CssClass="form-control" ID="txtFiltrar" />
                 </div>
-                <div class="col-md-1 align-self-end">
-                    <asp:Button Text="Buscar" CssClass="btn btn-success" ID="btnBuscar" OnClick="btnBuscar_Click" runat="server" />
+                <div class="col-md-3" style="margin-top: 24px;">
+                    <asp:Button Text="Buscar" CssClass="btn btn-success mr-2 " ID="btnBuscar" OnClick="btnBuscar_Click" runat="server" />
+                    <asp:Button Text="Actualizar" CssClass="btn btn-primary" ID="btnActualizar" OnClick="btnActualizar_Click" runat="server" />
                 </div>
+               
             </div>
-        </ContentTemplate>
+        
     
 
     <%-- <% foreach (dominio.Articulo articulo in ListaArticulos)
