@@ -3,9 +3,9 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <asp:ScriptManager ID="ScripManager1" runat="server"></asp:ScriptManager>
+    
 
-    <asp:UpdatePanel runat="server">
+    
         <ContentTemplate>
             <div class="container">
                 <div class="container text-center mt-5">
@@ -36,7 +36,7 @@
                 </div>
             </div>
         </ContentTemplate>
-    </asp:UpdatePanel>
+    
 
     <%-- <% foreach (dominio.Articulo articulo in ListaArticulos)
                 { %>
