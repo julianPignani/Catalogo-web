@@ -70,6 +70,7 @@
     <Content Include="Bienvenida.aspx" />
     <Content Include="Default.aspx" />
     <Content Include="Error.aspx" />
+    <Content Include="Favorito.aspx" />
     <Content Include="FormularioArticulo.aspx" />
     <Content Include="Global.aspx" />
     <Content Include="ListaArticulo.aspx" />
@@ -100,6 +101,13 @@
     </Compile>
     <Compile Include="Error.aspx.designer.cs">
       <DependentUpon>Error.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Favorito.aspx.cs">
+      <DependentUpon>Favorito.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Favorito.aspx.designer.cs">
+      <DependentUpon>Favorito.aspx</DependentUpon>
     </Compile>
     <Compile Include="FormularioArticulo.aspx.cs">
       <DependentUpon>FormularioArticulo.aspx</DependentUpon>

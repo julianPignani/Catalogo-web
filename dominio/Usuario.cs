@@ -30,6 +30,8 @@ namespace dominio
 
         public TipoUsario TipoUsarios { get; set; }
 
+        public List<string> Favoritos { get; set; }
+
         //Creamos el constrctor
         public Usuario(string user, string pass, bool admin)
         {

@@ -12,7 +12,10 @@ namespace vista
 {
     public partial class Default : System.Web.UI.Page
     {
-
+        //creo una lista para agregar los favoritos. (para el evento btnCorazon)
+        List<string> favoritos;
+        //Declaro el user acá para poder tomarlo afuera de los if.(para el evento btnCorazon)
+        Usuario user;
 
         //Creamos una propiedad publica para traer la lista
         public List<Articulo> ListaArticulos { get; set; }
@@ -35,6 +38,7 @@ namespace vista
                 Session.Add("listaArticulos", negocio.listarConSP());
                 if (!IsPostBack)
                 {
+                    //mostramos los articulos
                     repRepetidor.DataSource = Session["listaArticulos"];
                     repRepetidor.DataBind();
                 }
@@ -48,6 +52,7 @@ namespace vista
 
         }
 
+        //Evento para ver el articulo en un detalle mas grande.
         protected void btnVerDetalle_Click(object sender, EventArgs e)
         {
             //Capturamos el argumento que viene a través del btnVerDetalle con el Id.
@@ -85,6 +90,7 @@ namespace vista
         {
             try
             {
+                //Llamamos a la funsion filtrarConImg y le pasamos los parametros.
                 ArticuloNegocio negecio = new ArticuloNegocio();
                 repRepetidor.DataSource = negecio.filtrarConImg(ddlCampo.SelectedItem.ToString(), ddlCriterio.SelectedItem.ToString(), txtFiltrar.Text);
                 repRepetidor.DataBind();
@@ -117,5 +123,58 @@ namespace vista
                 Response.Redirect("Error.aspx", false);
             }
         }
+
+        //Evento para manejar el color del corazón.
+        protected void btnFavorito_Click(object sender, EventArgs e)
+        {
+            if (Seguridad.sesionActiva(Session["usuario"]))
+            {
+
+                //leemos el id que viene por el btn
+                string IdFavorito = ((Button)sender).CommandArgument;
+
+                //Verificamos si la session existe
+                if (Session["usuario"] != null)
+                {
+                    //traemos la info del usuario(recordar que el user esta declarado como variable local)
+                    user = (Usuario)Session["usuario"];
+
+                    //Verificamos si existe una lista de favoritos en session sino la creamos
+                    if (user.Favoritos == null)
+                    {
+                        user.Favoritos = new List<string>();
+                    }
+
+                    //obtenemos la lista de favoritos del usuario
+                    favoritos = user.Favoritos;
+                    //guardamos la lista en session
+                    Session["listaFavoritos"] = favoritos;
+
+                }
+                // Verificamos si el artículo está presente en la lista de favoritos
+                if (favoritos.Contains(IdFavorito))
+                {
+                    //si no está, remueve ese articulo y deja el corazon en blanco
+                    favoritos.Remove(IdFavorito);
+                    ((Button)sender).Text = "💚";
+                }
+                else
+                {
+                    // Agrega el artículo a la lista de favoritos
+                    favoritos.Add(IdFavorito);
+                    ((Button)sender).Text = "❤️";
+                }
+                //Actualizamos los datos en la session
+                Session["usuario"] = user;
+
+                // Guardamos el ID del favorito en la sesión
+                Session["idFavorito"] = IdFavorito;
+
+                //enviamos la session a favorito.aspx
+                Response.Redirect("Favorito.aspx", false);
+            }
+
+        }
     }
+    
 }
