@@ -12,8 +12,6 @@
         }
     </style>
 
-
-
     <div class="container">
         <div class="container text-center mt-5 mb-3">
             <h1 class="display-4  text-primary m-3"><u>Explora Nuestro Catálogo de Artículos</u></h1>
@@ -73,7 +71,7 @@
                             <p class="card-text"><%#Eval("Descripcion")  %></p>
                             <%--<a href="VerDetalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">Ver Detalle</a>--%>  <%--otra forma de poder hacerlo--%>
                             <div class="d-flex justify-content-center">
-                                <asp:Button Text="Ver detalle" CssClass="btn btn-primary" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloId" OnClick="btnVerDetalle_Click" />
+                                <asp:Button Text="Ver detalle" CssClass="btn btn-primary" runat="server" ID="btnVerDetalle" CommandArgument='<%#Eval("Id")%>' CommandName="ArticuloId" OnClick="btnVerDetalle_Click" OnClientClick="return false;" />
                             </div>
                             <div class="d-flex justify-content-end">
                                 <asp:Button runat="server" ID="btnFavorito" CssClass="btn btn-light ml-auto " Text="❤️" CommandArgument='<%#Eval("Id")%>' CommandName="FavoritoId" OnClick="btnFavorito_Click" />

@@ -71,6 +71,68 @@ namespace negocio
             }
 
         }
+
+        public List<Articulo> listarFavorito(List<string> ids)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            List<Articulo> lista = new List<Articulo>();
+
+            try
+            {
+                // Suponiendo que ids es la lista de IDs,Convertir la lista de IDs a una cadena separada por comas
+                string idsParam = string.Join(",", ids.Select(id => "@" + id)); // Transforma los IDs en parámetros, ej: "@id1,@id2,@id3"
+
+                string consulta = $"SELECT A.Id, Nombre, A.Descripcion, ImagenUrl, M.Descripcion as Marca, A.IdMarca, C.Descripcion as Categoria, A.IdCategoria FROM ARTICULOS A JOIN MARCAS M ON M.Id = A.IdMarca JOIN CATEGORIAS C ON C.Id = A.IdCategoria WHERE A.Id IN ({string.Join(",", ids)})";
+
+                // Configurar la consulta con los parámetros
+                for (int i = 0; i < ids.Count; i++)
+                {
+                    //Reemplazamos los parametros en la consulta
+                    consulta = consulta.Replace($"@id{i + 1}", ids[i]);
+                }
+
+                datos.setearQuery(consulta);
+                datos.ejecutarQuery();
+
+                while (datos.Lector.Read())
+                {
+                    // Construir objetos Articulo y agregar a la lista
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+
+                    //Validamos la urlImagen por si esta null (Sirve para cualquier columna que no puede ser null)
+                    if (!(datos.Lector["ImagenUrl"] is DBNull)) //si no es null
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+
+                    aux.Categoria = new Categoria();
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
+
+
+
+                    lista.Add(aux);
+                }
+            }
+            catch (Exception ex)
+            {
+                // Manejar excepciones
+                 ex.ToString();
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+
+            return lista;
+        }
+
+
         //Metodo para listar con Stored Procedure
         public List<Articulo> listarConSP()
         {

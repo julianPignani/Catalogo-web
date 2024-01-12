@@ -1,3 +1,5 @@
+C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.csproj.AssemblyReference.cache
+C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.csproj.CoreCompileInputs.cache
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\vista.dll.config
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\vista.dll
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\vista.pdb
@@ -56,8 +58,6 @@ C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\negocio.dll
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\dominio.pdb
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\negocio.pdb
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
-C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.csproj.AssemblyReference.cache
-C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.csproj.CoreCompileInputs.cache
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.csproj.CopyComplete
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.dll
 C:\C-sharp-MaxiPrograma\CatalogoWeb\CatalogoArticulosWeb\vista\obj\Debug\vista.pdb

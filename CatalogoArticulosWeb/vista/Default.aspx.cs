@@ -127,54 +127,68 @@ namespace vista
         //Evento para manejar el color del corazón.
         protected void btnFavorito_Click(object sender, EventArgs e)
         {
-            if (Seguridad.sesionActiva(Session["usuario"]))
+            try
             {
-
-                //leemos el id que viene por el btn
-                string IdFavorito = ((Button)sender).CommandArgument;
-
-                //Verificamos si la session existe
-                if (Session["usuario"] != null)
+                if (Seguridad.sesionActiva(Session["usuario"]))
                 {
-                    //traemos la info del usuario(recordar que el user esta declarado como variable local)
-                    user = (Usuario)Session["usuario"];
+                    // Leemos el ID que viene por el btn
+                    string IdFavorito = ((Button)sender).CommandArgument;
 
-                    //Verificamos si existe una lista de favoritos en session sino la creamos
-                    if (user.Favoritos == null)
+                    // Verificamos si la sesión del usuario existe
+                    if (Session["usuario"] != null)
                     {
-                        user.Favoritos = new List<string>();
+                        // Traemos la información del usuario (recuerda que 'user' está declarado como variable local)
+                        user = (Usuario)Session["usuario"];
+
+                        // Verificamos si existe una lista de favoritos en la sesión, si no la creamos
+                        if (user.Favoritos == null)
+                        {
+                            user.Favoritos = new List<string>();
+                        }
+
+                        // Obtenemos la lista de favoritos del usuario
+                        favoritos = user.Favoritos;
+
+                        // Verificamos si el artículo está presente en la lista de favoritos
+                        if (favoritos.Contains(IdFavorito))
+                        {
+                            // Si no está, removemos ese artículo y dejamos el corazón en blanco
+                            favoritos.Remove(IdFavorito);
+                        }
+                        else
+                        {
+                            // Agregamos el artículo a la lista de favoritos
+                            favoritos.Add(IdFavorito);
+                        }
+
+                        // Actualizamos los datos en la sesión
+                        Session["usuario"] = user;
+
+                        // Asignamos la lista de favoritos a Session["listaFavoritos"] para despues capturarla en Favorito.aspx
+                        Session["listaFavoritos"] = favoritos;
                     }
+                    //Funcion JS
+                    // Devuelve el estado actual del artículo
+                    bool esFavorito = favoritos.Contains(IdFavorito);
 
-                    //obtenemos la lista de favoritos del usuario
-                    favoritos = user.Favoritos;
-                    //guardamos la lista en session
-                    Session["listaFavoritos"] = favoritos;
+                    // Devuelve el estado actual del artículo como una respuesta JSON
+                    string respuestaJson = $"{{\"idFavorito\":\"{IdFavorito}\",\"esFavorito\":{esFavorito.ToString().ToLower()}}}";
 
+                    // Envia la respuesta JSON al cliente usando JavaScript
+                    ScriptManager.RegisterStartupScript(this, GetType(), "ActualizarInterfaz", $"ActualizarInterfaz({respuestaJson});", true);
+                    // Cancela la acción predeterminada del botón para evitar la recarga de la página
+                    ScriptManager.RegisterStartupScript(this, GetType(), "CancelarAccion", "return false;", true);
                 }
-                // Verificamos si el artículo está presente en la lista de favoritos
-                if (favoritos.Contains(IdFavorito))
-                {
-                    //si no está, remueve ese articulo y deja el corazon en blanco
-                    favoritos.Remove(IdFavorito);
-                    ((Button)sender).Text = "💚";
-                }
-                else
-                {
-                    // Agrega el artículo a la lista de favoritos
-                    favoritos.Add(IdFavorito);
-                    ((Button)sender).Text = "❤️";
-                }
-                //Actualizamos los datos en la session
-                Session["usuario"] = user;
+            }
+            catch (Exception ex)
+            {
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
 
-                // Guardamos el ID del favorito en la sesión
-                Session["idFavorito"] = IdFavorito;
-
-                //enviamos la session a favorito.aspx
-                Response.Redirect("Favorito.aspx", false);
             }
 
         }
     }
-    
 }
+
+
