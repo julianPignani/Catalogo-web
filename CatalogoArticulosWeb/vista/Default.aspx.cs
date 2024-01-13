@@ -154,37 +154,35 @@ namespace vista
                         {
                             // Si no está, removemos ese artículo y dejamos el corazón en blanco
                             favoritos.Remove(IdFavorito);
+                            ((Button)sender).Text = "❤️";
                         }
                         else
                         {
                             // Agregamos el artículo a la lista de favoritos
                             favoritos.Add(IdFavorito);
+                            ((Button)sender).Text = "💚";
                         }
 
                         // Actualizamos los datos en la sesión
                         Session["usuario"] = user;
 
-                        // Asignamos la lista de favoritos a Session["listaFavoritos"] para despues capturarla en Favorito.aspx
+                        // Asignamos la lista de favoritos a Session["listaFavoritos"]
                         Session["listaFavoritos"] = favoritos;
                     }
-                    //Funcion JS
-                    // Devuelve el estado actual del artículo
-                    bool esFavorito = favoritos.Contains(IdFavorito);
 
-                    // Devuelve el estado actual del artículo como una respuesta JSON
-                    string respuestaJson = $"{{\"idFavorito\":\"{IdFavorito}\",\"esFavorito\":{esFavorito.ToString().ToLower()}}}";
-
-                    // Envia la respuesta JSON al cliente usando JavaScript
-                    ScriptManager.RegisterStartupScript(this, GetType(), "ActualizarInterfaz", $"ActualizarInterfaz({respuestaJson});", true);
-                    // Cancela la acción predeterminada del botón para evitar la recarga de la página
-                    ScriptManager.RegisterStartupScript(this, GetType(), "CancelarAccion", "return false;", true);
+                    // Redireccionamos a Favorito.aspx
+                    Response.Redirect("Favorito.aspx", false);
+                    
                 }
+
+
+
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
-
+                
             }
 
         }
