@@ -11,6 +11,7 @@ namespace vista
 {
     public partial class Favorito : System.Web.UI.Page
     {
+        public string idArticulo;
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -44,12 +45,31 @@ namespace vista
         {
             try
             {
+                if (sender is Button btnDeshacer)
+                {
+                    //Guardamos el id
+                    idArticulo = btnDeshacer.CommandArgument;
 
+                    //llamamos la session
+                    List<string> favoritosIds = (List<string>)Session["listaFavoritos"];
+
+                    // Eliminamos el IdArticulo de la lista de favoritos
+                    favoritosIds.Remove(idArticulo);
+
+                    // Vuelvemos a cargar la lista de favoritos
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    repFavorito.DataSource = negocio.listarFavorito(favoritosIds);
+                    repFavorito.DataBind();
+
+                    // Actualizamos la sesión con la nueva lista de favoritos
+                    Session["listaFavoritos"] = favoritosIds;
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                Session.Add("error", ex.ToString());
+                Response.Redirect("Error.aspx", false);
             }
         }
     }

@@ -66,8 +66,7 @@ namespace vista
                     string nombreArchivo = "perfil-" + user.Id + "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg";
                     string ruta = Server.MapPath("./Images/");
                     txtImagen.PostedFile.SaveAs(ruta + nombreArchivo);
-                    
-
+               
                     // Actualizamos la propiedad ImagenPerfil 
                     user.ImagenPerfil = nombreArchivo;
                 }

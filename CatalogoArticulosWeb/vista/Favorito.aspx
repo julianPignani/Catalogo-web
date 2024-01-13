@@ -19,7 +19,7 @@
                             <p class="card-text" style="color: red; font-weight: bold;"><%#Eval("Marca") %></p>
                             <p class="card-text"><%#Eval("Descripcion")  %></p>
                             <div class="d-flex justify-content-center">
-                                <asp:Button Text="Deshacer" CssClass="btn btn-danger" ID="btnDeshacer" OnClick="btnDeshacer_Click" runat="server" />
+                                <asp:Button Text="Deshacer" CssClass="btn btn-danger" ID="btnDeshacer" OnClick="btnDeshacer_Click" CommandArgument='<%# Eval("Id") %>' runat="server" />
                             </div>
                         </div>
                     </div>
