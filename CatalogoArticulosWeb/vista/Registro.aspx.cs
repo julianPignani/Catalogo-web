@@ -55,7 +55,7 @@ namespace vista
                         //cargamos en session los datos del usuario
                         Session.Add("usuario", user); 
 
-                        Response.Redirect("Default.aspx", false); // Si se registra bien, lo enviamos al home.
+                        Response.Redirect("Login.aspx", false); // Si se registra bien, lo enviamos al home.
                     }
                 }
             }

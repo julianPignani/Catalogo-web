@@ -11,11 +11,14 @@ namespace vista
 {
     public partial class MiPerfil : System.Web.UI.Page
     {
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
             try
             {
+
 
                 //Validamos,si el usuario ya tiene el perfil cargado, le mostramos los datos que guardó.
                 if (!IsPostBack)
@@ -29,7 +32,7 @@ namespace vista
                         txtFechaNac.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
                         if (!string.IsNullOrEmpty(user.ImagenPerfil))
                             imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
-  
+
                     }
                 }
             }
@@ -60,12 +63,13 @@ namespace vista
                 //Guardamos la ruta de la imagen en la carpeta con el nombre + el id del us. 
                 if (txtImagen.PostedFile.FileName != "") //(si no hay nada seleccionado significa que esta vacio, sino capturamos la ruta)
                 {
+                    string nombreArchivo = "perfil-" + user.Id + "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg";
                     string ruta = Server.MapPath("./Images/");
-                    txtImagen.PostedFile.SaveAs(ruta + "perfil-" + user.Id + ".jpg");
+                    txtImagen.PostedFile.SaveAs(ruta + nombreArchivo);
+                    
 
-                    //Guardamos la imagen en la DB
-                    user.ImagenPerfil = "perfil-" + user.Id + ".jpg";
-
+                    // Actualizamos la propiedad ImagenPerfil 
+                    user.ImagenPerfil = nombreArchivo;
                 }
                 //Capturamos los demas datos y llamamos al método
                 user.Nombre = txtNombre.Text;
@@ -76,7 +80,11 @@ namespace vista
                 //LEER IMG
                 //para poder acceder a la master y buscar el id de la imagen el el aspx
                 Image img = (Image)Master.FindControl("imgPerfil");
-                img.ImageUrl = "~/Images/" + user.ImagenPerfil;
+                img.ImageUrl = "~/Images/" + user.ImagenPerfil + "?timestamp=" + DateTime.Now.Ticks;
+
+
+                // Ejecutar la función JavaScript después de guardar
+                //ScriptManager.RegisterStartupScript(this, this.GetType(), "mostrarMensaje", "mostrarMensaje();", true);
 
                 Response.Redirect("MiPerfil.aspx", false);
             }
@@ -86,22 +94,6 @@ namespace vista
                 Response.Redirect("Error.aspx", false);
 
             }
-        }
-
-        protected void btnModificar_Click(object sender, EventArgs e)
-        {
-            // Habilitar los controles y mostrar los botones "Guardar" y "Cancelar"
-            txtEmail.Enabled = false;
-            txtNombre.Enabled = true;
-            txtApellido.Enabled = true;
-            txtFechaNac.Enabled = true;
-            txtImagen.Disabled = false;
-
-            btnGuardar.Visible = true;
-            btnModificar.Visible = false;
-
-
-
         }
     }
 }
