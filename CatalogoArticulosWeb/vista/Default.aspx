@@ -66,7 +66,7 @@
                     <div class="card h-100 mb-3 d-flex flex-column">
                         <img src="<%#Eval("ImagenUrl")%>" class="card-img-top img-fluid" alt="..." style="height: 300px; object-fit: cover; object-position: center;">
                         <div class="card-body text-center">
-                            <h4 class="card-title"><%#Eval("Nombre")%></h4>
+                            <h5 class="card-title"><%#Eval("Nombre")%></h5>
                             <p class="card-text" style="color: red; font-weight: bold;"><%#Eval("Marca") %></p>
                             <p class="card-text"><%#Eval("Descripcion")  %></p>
                             <%--<a href="VerDetalle.aspx?id=<%#Eval("Id") %>" class="btn btn-primary">Ver Detalle</a>--%>  <%--otra forma de poder hacerlo--%>
