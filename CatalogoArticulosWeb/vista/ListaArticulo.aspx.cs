@@ -46,7 +46,7 @@ namespace vista
             //Capturamos el id que nos llega por el evento modificar
             string id = dgvArticulos.SelectedDataKey.Value.ToString();
             //Y lo enviamos al formulario para modificar
-            Response.Redirect("FormularioArticulo.aspx?id=" + id);
+            Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
         }
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)

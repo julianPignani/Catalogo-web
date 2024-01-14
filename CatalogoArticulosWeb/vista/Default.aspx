@@ -1,7 +1,11 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/MyMaster.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="vista.Default" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+
+    <!-- Agrega el siguiente enlace para cargar Bootstrap desde un CDN -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-TX8e52RombbfZ6bI9YRNtUn6CGfnTdrnP6dGooxFPpqZGfcjbqGGtNr8dJBhZb1f" crossorigin="anonymous">
 </asp:Content>
+
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
 
     <style>
@@ -82,5 +86,10 @@
             </ItemTemplate>
         </asp:Repeater>
     </div>
+
+    <!-- Agrega el siguiente script para cargar jQuery y Bootstrap JS desde CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-12Y9o1YYUnWy0XqBRsIkzD5f9AxNKUDqSWxW04jDIQU8e2F0Y8llv+KxUIdxWWea" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy61q39/cFDSjS10peP5gI0FkU1pbzm6V" crossorigin="anonymous"></script>
 
 </asp:Content>
