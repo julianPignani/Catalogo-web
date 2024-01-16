@@ -131,60 +131,45 @@ namespace vista
             {
                 if (Seguridad.sesionActiva(Session["usuario"]))
                 {
-                    // Leemos el ID que viene por el btn
-                    string IdFavorito = ((Button)sender).CommandArgument;
+                    // Lees el ID del artículo marcado como favorito
+                    string idFavorito = ((Button)sender).CommandArgument;
 
-                    // Verificamos si la sesión del usuario existe
-                    if (Session["usuario"] != null)
-                    {
-                        // Traemos la información del usuario (recuerda que 'user' está declarado como variable local)
-                        user = (Usuario)Session["usuario"];
+                    // Obtiene el ID del usuario actual desde la sesión
+                    int idUsuario = ObtenerIdUsuarioActual();
 
-                        // Verificamos si existe una lista de favoritos en la sesión, si no la creamos
-                        if (user.Favoritos == null)
-                        {
-                            user.Favoritos = new List<string>();
-                        }
+                    // Almacenas ese ID en la sesión
+                    List<string> favoritos = (List<string>)Session["favoritos"] ?? new List<string>();
+                    favoritos.Add(idFavorito);
+                    Session["favoritos"] = favoritos;
 
-                        // Obtenemos la lista de favoritos del usuario
-                        favoritos = user.Favoritos;
+                    // También guardamos el ID en la base de datos
+                    ArticuloNegocio negocio = new ArticuloNegocio();
+                    negocio.agregarFavorito(idFavorito, idUsuario);
 
-                        // Verificamos si el artículo está presente en la lista de favoritos
-                        if (favoritos.Contains(IdFavorito))
-                        {
-                            // Si no está, removemos ese artículo y dejamos el corazón en blanco
-                            favoritos.Remove(IdFavorito);
-                            ((Button)sender).Text = "❤️";
-                        }
-                        else
-                        {
-                            // Agregamos el artículo a la lista de favoritos
-                            favoritos.Add(IdFavorito);
-                            ((Button)sender).Text = "💚";
-                        }
-
-                        // Actualizamos los datos en la sesión
-                        Session["usuario"] = user;
-
-                        // Asignamos la lista de favoritos a Session["listaFavoritos"]
-                        Session["listaFavoritos"] = favoritos;
-                    }
-
-                    // Redireccionamos a Favorito.aspx
+                    // Rediriges a la página Favoritos.aspx
                     Response.Redirect("Favorito.aspx", false);
-                    
+
                 }
-
-
-
             }
             catch (Exception ex)
             {
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
-                
+
             }
 
+        }
+        private int ObtenerIdUsuarioActual()
+        {
+            // Obtenemos el ID del usuario actual desde la sesión
+            // En este ejemplo, se asume que guardaste el ID al registrarse
+            if (Session["IdUsuario"] != null)
+            {
+                return Convert.ToInt32(Session["IdUsuario"]);
+            }
+
+            // Manejo de error o retorno de valor predeterminado 
+            return -1;
         }
     }
 }

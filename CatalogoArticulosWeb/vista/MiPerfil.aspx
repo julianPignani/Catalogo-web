@@ -72,7 +72,7 @@
         <div class="col-md-4">
             <div class="mb-3">
                 <label class="form-label">Email</label>
-                <asp:TextBox CssClass="form-control" ID="txtEmail" runat="server" />
+                <asp:TextBox CssClass="form-control" ID="txtEmail" runat="server" Enabled="false" />
             </div>
             <div class="mb-3">
                 <label class="form-label">Nombre</label>

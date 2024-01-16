@@ -52,8 +52,11 @@ namespace vista
                         // Llamo al método para insertar y lo guardo en la variable id
                         user.Id = negocio.Registrarse(user);
 
+                        // Almaceno el ID del usuario en la sesión
+                        Session["IdUsuario"] = user.Id;
+
                         //cargamos en session los datos del usuario
-                        Session.Add("usuario", user); 
+                        Session["usuario"] = user; 
 
                         Response.Redirect("Login.aspx", false); // Si se registra bien, lo enviamos al home.
                     }

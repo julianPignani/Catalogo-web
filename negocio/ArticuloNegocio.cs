@@ -132,6 +132,29 @@ namespace negocio
             return lista;
         }
 
+        public void agregarFavorito( string idFavorito, int idUsuario)
+        {
+            AccesoDatos datos = new AccesoDatos();
+            
+            try
+            {
+                // Llamamos al método setearQuery para pasarle la consulta, SetearParametros y ejecutarAccion
+                datos.setearQuery("INSERT INTO FAVORITOS(idUsuario, idArticulo) VALUES (@idUsuario, @idArticulo)");
+                datos.setearParametros("@idUsuario", idUsuario);
+                datos.setearParametros("@idArticulo", idFavorito);
+                datos.ejecutarAccion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
 
         //Metodo para listar con Stored Procedure
         public List<Articulo> listarConSP()

@@ -41,13 +41,14 @@ namespace vista
             }
         }
 
-        protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            //Capturamos el id que nos llega por el evento modificar
-            string id = dgvArticulos.SelectedDataKey.Value.ToString();
-            //Y lo enviamos al formulario para modificar
-            Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
-        }
+        //protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+        //    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
+        //    // Obtener el valor del CommandArgument del botón en la columna de acción
+        //    //string id = dgvArticulos.SelectedDataKey["Id"].ToString();
+        //    //Y lo enviamos al formulario para modificar
+        //    Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
+        //}
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -109,12 +110,15 @@ namespace vista
         {
             try
             {
+
                 ArticuloNegocio negocio = new ArticuloNegocio();
-                dgvArticulos.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                List<Articulo> listaFiltrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
                     ddlCriterio.SelectedItem.ToString(),
                     txtFiltroAvanzado.Text);
-                dgvArticulos.DataBind();
 
+                // Actualiza la fuente de datos del GridView con la lista filtrada
+                dgvArticulos.DataSource = listaFiltrada;
+                dgvArticulos.DataBind();
 
             }
             catch (Exception ex)
@@ -122,6 +126,17 @@ namespace vista
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
 
+            }
+        }
+        protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName == "ModificarEliminar")
+            {
+                // Obtener el ID del comando seleccionado
+                string id = e.CommandArgument.ToString();
+
+                // Y lo enviamos al formulario para modificar
+                Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
             }
         }
     }
