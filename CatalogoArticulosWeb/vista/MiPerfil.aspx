@@ -15,12 +15,11 @@
         function validarCampos() {
             var txtNombre = document.getElementById("txtNombre");
             var txtApellido = document.getElementById("txtApellido");
-            var txtFechaNac = document.getElementById("txtFechaNac");
 
             // Remueve clases de validación previas
             txtNombre.classList.remove("is-invalid", "is-valid");
             txtApellido.classList.remove("is-invalid", "is-valid");
-            txtFechaNac.classList.remove("is-invalid", "is-valid");
+
 
             // Realiza la validación
             var validacionExitosa = true;
@@ -43,14 +42,6 @@
                 txtApellido.classList.add("is-valid");
             }
 
-            if (txtFechaNac.value.trim() === '') {
-                // Agrega clase de invalidación
-                txtFechaNac.classList.add("is-invalid");
-                validacionExitosa = false;
-            } else {
-                // Agrega clase de validación
-                txtFechaNac.classList.add("is-valid");
-            }
 
             // Si la validación del lado del cliente es exitosa, permitir la operación de guardado
             if (validacionExitosa) {
@@ -83,11 +74,6 @@
                 <label class="form-label">Apellido</label>
                 <asp:TextBox CssClass="form-control" ID="txtApellido" ClientIDMode="Static" runat="server" />
                 <asp:RequiredFieldValidator ErrorMessage="El campo es requerido." CssClass="validacion" ControlToValidate="txtApellido" runat="server" />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">Fecha de Nacimiento</label>
-                <asp:TextBox CssClass="form-control" ID="txtFechaNac" ClientIDMode="Static" runat="server" TextMode="Date" />
-                <asp:RequiredFieldValidator ErrorMessage="El campo es requerido" CssClass="validacion" ControlToValidate="txtFechaNac" runat="server" />
             </div>
         </div>
 

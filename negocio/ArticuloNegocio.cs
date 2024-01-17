@@ -23,7 +23,7 @@ namespace negocio
             //Configuramos
             try
             {
-                conexion.ConnectionString = "server =.\\SQLEXPRESS01; database = CATALOGO_DB; integrated security = true";
+                conexion.ConnectionString = "server =.\\SQLEXPRESS01; database = CATALOGO_WEB_DB; integrated security = true";
                 comando.CommandType = System.Data.CommandType.Text;
                 comando.CommandText = "SELECT A.Id, Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, M.Id as IdMarca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria ";
                 if (id != "") //validamos si viene con un id

@@ -16,3 +16,12 @@ C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.csproj.CoreCompile
 C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.csproj.CopyComplete
 C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.dll
 C:\C-sharp-MaxiPrograma\CatalogoWeb\negocio\obj\Debug\negocio.pdb
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Debug\negocio.dll
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Debug\negocio.pdb
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Debug\dominio.dll
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Debug\dominio.pdb
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.csproj.AssemblyReference.cache
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.csproj.CoreCompileInputs.cache
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.csproj.CopyComplete
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.dll
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.pdb

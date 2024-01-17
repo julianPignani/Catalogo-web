@@ -14,7 +14,7 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("Select id, email, pass ,ImagenPerfil, nombre, apellido ,fechaNacimiento ,tipouser from USERS where email = @email AND pass = @pass");
+                datos.setearQuery("Select id, email, pass ,urlImagenPerfil, nombre, apellido ,admin from USERS where email = @email AND pass = @pass");
                 datos.setearParametros("@email", usuario.Email);
                 datos.setearParametros("@pass", usuario.Pass);
 
@@ -26,16 +26,15 @@ namespace negocio
                     usuario.Id = (int)datos.Lector["id"];
 
                     //Validamos la imagen, si es diferente a null, entonces guardamos la imagen, los demás los validamos porq son datos no requeridos y pueden generar error.
-                    if (!(datos.Lector["ImagenPerfil"] is DBNull))
-                        usuario.ImagenPerfil = (string)datos.Lector["ImagenPerfil"];
+                    if (!(datos.Lector["urlImagenPerfil"] is DBNull))
+                        usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
                     if(!(datos.Lector["nombre"] is DBNull))
                         usuario.Nombre = (string)datos.Lector["nombre"];
                     if(!(datos.Lector["apellido"] is DBNull))
                         usuario.Apellido = (string)datos.Lector["apellido"];
-                    if(!(datos.Lector["fechaNacimiento"] is DBNull))
-                        usuario.FechaNacimiento = DateTime.Parse(datos.Lector["fechaNacimiento"].ToString());
 
-                    usuario.TipoUsarios = (int)datos.Lector["TipoUser"] == 2 ? Usuario.TipoUsario.ADMIN : Usuario.TipoUsario.NORMAL;
+                    usuario.Admin = (bool)datos.Lector["admin"];
+
 
 
 
@@ -61,9 +60,11 @@ namespace negocio
             try
             {
                 //Esté storedProc. nos va a devovler un valor entero, en este caso el número de id con el que se guarda.
-                datos.setearStoredProcedure("registrarNuevo");
+                datos.setearStoredProcedure("storedregistrarNuevo");
                 datos.setearParametros("@email", user.Email);
                 datos.setearParametros("@pass", user.Pass);
+                datos.setearParametros("@admin", Seguridad.esAdmin(user) ? 1 : 0);  // 1 para admin, 0 para usuario normal
+
                 return datos.ejecutarAccionScalar();
             }
 
@@ -85,12 +86,11 @@ namespace negocio
             try
             {
 
-                datos.setearQuery("Update USERS set ImagenPerfil = @imagen, Nombre = @nombre, Apellido = @apellido, FechaNacimiento = @fechaNac  where Id = @id");
+                datos.setearQuery("Update USERS set urlImagenPerfil = @imagen, Nombre = @nombre, Apellido = @apellido  where Id = @id");
                 //datos.setearParametros("@imagen", user.ImagenPerfil != null ? user.ImagenPerfil : (object)DBNull.Value); //si no guarda una  img q guarde un null.
                 datos.setearParametros("@imagen", (object)user.ImagenPerfil ?? DBNull.Value); //(Operador para nulls), podemos usar esta forma o la de arriba. 
                 datos.setearParametros("@nombre", user.Nombre);
                 datos.setearParametros("@apellido", user.Apellido);
-                datos.setearParametros("@fechaNac", user.FechaNacimiento);
                 datos.setearParametros("@id", user.Id);
 
                 datos.ejecutarAccion();

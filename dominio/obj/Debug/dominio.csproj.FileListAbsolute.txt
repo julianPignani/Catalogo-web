@@ -10,3 +10,9 @@ C:\C-sharp-MaxiPrograma\CatalogoWeb\dominio\obj\Debug\dominio.csproj.CoreCompile
 C:\C-sharp-MaxiPrograma\CatalogoWeb\dominio\obj\Debug\dominio.dll
 C:\C-sharp-MaxiPrograma\CatalogoWeb\dominio\obj\Debug\dominio.pdb
 C:\C-sharp-MaxiPrograma\CatalogoWeb\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
+C:\CatalogoWeb\Catalogo-web\dominio\bin\Debug\dominio.dll
+C:\CatalogoWeb\Catalogo-web\dominio\bin\Debug\dominio.pdb
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Debug\dominio.csproj.AssemblyReference.cache
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Debug\dominio.csproj.CoreCompileInputs.cache
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Debug\dominio.dll
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Debug\dominio.pdb

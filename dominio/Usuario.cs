@@ -9,12 +9,6 @@ namespace dominio
 {
     public class Usuario
     {
-        //Creamos un Enum para manejar el tipo de usuario (user o admin)
-        public enum TipoUsario
-        {
-            NORMAL = 1,
-            ADMIN = 2
-        }
 
         public int Id { get; set; }
         public string Email { get; set; }
@@ -25,11 +19,9 @@ namespace dominio
 
         public string Apellido { get; set; }
 
-        public DateTime FechaNacimiento { get; set; }
-
         public string ImagenPerfil { get; set; }
 
-        public TipoUsario TipoUsarios { get; set; }
+        public bool Admin { get; set; }
 
         public List<string> Favoritos { get; set; }
 
@@ -38,7 +30,7 @@ namespace dominio
         {
             Email = user;
             Pass = pass;
-            TipoUsarios = admin ? TipoUsario.ADMIN : TipoUsario.NORMAL;
+            Admin = admin;
         }
         //constructor vacio
         public Usuario() { }

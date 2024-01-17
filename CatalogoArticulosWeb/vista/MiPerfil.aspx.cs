@@ -29,7 +29,6 @@ namespace vista
                         txtEmail.Text = user.Email;
                         txtNombre.Text = user.Nombre;
                         txtApellido.Text = user.Apellido;
-                        txtFechaNac.Text = user.FechaNacimiento.ToString("yyyy-MM-dd");
                         if (!string.IsNullOrEmpty(user.ImagenPerfil))
                             imgNuevoPerfil.ImageUrl = "~/Images/" + user.ImagenPerfil;
 
@@ -73,7 +72,6 @@ namespace vista
                 //Capturamos los demas datos y llamamos al método
                 user.Nombre = txtNombre.Text;
                 user.Apellido = txtApellido.Text;
-                user.FechaNacimiento = DateTime.Parse(txtFechaNac.Text);
                 negocio.actualizar(user);
 
                 //LEER IMG
