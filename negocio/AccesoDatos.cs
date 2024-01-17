@@ -85,7 +85,7 @@ namespace negocio
             catch (Exception ex)
             {
 
-                throw ex;
+                throw new Exception("Error al ejecutar acción escalar.", ex);
             }
             finally
             {

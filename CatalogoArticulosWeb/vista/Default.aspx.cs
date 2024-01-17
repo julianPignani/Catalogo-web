@@ -131,24 +131,26 @@ namespace vista
             {
                 if (Seguridad.sesionActiva(Session["usuario"]))
                 {
-                    // Lees el ID del artículo marcado como favorito
-                    string idFavorito = ((Button)sender).CommandArgument;
+                    if (Session["IdUsuario"] != null)
+                    {
+                        int idUsuario = (int)Session["IdUsuario"];
+                        // Lees el ID del artículo marcado como favorito
+                        string idFavorito = ((Button)sender).CommandArgument;
 
-                    // Obtiene el ID del usuario actual desde la sesión
-                    int idUsuario = ObtenerIdUsuarioActual();
+                        // Creamos una instancia de Favorito y asignamos el IdUsuario
+                        dominio.Favorito favorito = new dominio.Favorito
+                        {
+                            IdUsuario = idUsuario,
+                            IdArticulo = idFavorito
+                        };
 
-                    // Almacenas ese ID en la sesión
-                    List<string> favoritos = (List<string>)Session["favoritos"] ?? new List<string>();
-                    favoritos.Add(idFavorito);
-                    Session["favoritos"] = favoritos;
+                        // También guardamos el ID en la base de datos
+                        ArticuloNegocio negocio = new ArticuloNegocio();
+                        negocio.agregarFavorito(favorito);
 
-                    // También guardamos el ID en la base de datos
-                    ArticuloNegocio negocio = new ArticuloNegocio();
-                    negocio.agregarFavorito(idFavorito, idUsuario);
-
-                    // Rediriges a la página Favoritos.aspx
-                    Response.Redirect("Favorito.aspx", false);
-
+                        // Rediriges a la página Favoritos.aspx
+                        Response.Redirect("Favorito.aspx", false);
+                    }
                 }
             }
             catch (Exception ex)
@@ -159,18 +161,7 @@ namespace vista
             }
 
         }
-        private int ObtenerIdUsuarioActual()
-        {
-            // Obtenemos el ID del usuario actual desde la sesión
-            // En este ejemplo, se asume que guardaste el ID al registrarse
-            if (Session["IdUsuario"] != null)
-            {
-                return Convert.ToInt32(Session["IdUsuario"]);
-            }
 
-            // Manejo de error o retorno de valor predeterminado 
-            return -1;
-        }
     }
 }
 

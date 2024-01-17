@@ -20,9 +20,10 @@ namespace vista
         {
             try
             {
+
                 Usuario user = new Usuario();
                 UsuarioNegocio negocio = new UsuarioNegocio();
-                
+
                 user.Email = txtEmail.Text;
                 user.Pass = txtPass.Text;
                 //cuando capturamos los datos, validamos que el email contenga @ y .
@@ -47,7 +48,7 @@ namespace vista
                     {
                         // Ocultar el mensaje de error si ambas validaciones pasan
                         lblErrorEmail.Visible = false;
-                        lblErrorPass.Visible = false; 
+                        lblErrorPass.Visible = false;
 
                         // Llamo al método para insertar y lo guardo en la variable id
                         user.Id = negocio.Registrarse(user);
@@ -56,12 +57,13 @@ namespace vista
                         Session["IdUsuario"] = user.Id;
 
                         //cargamos en session los datos del usuario
-                        Session["usuario"] = user; 
+                        Session["usuario"] = user;
 
                         Response.Redirect("Login.aspx", false); // Si se registra bien, lo enviamos al home.
                     }
                 }
             }
+
             catch (Exception ex)
             {
 

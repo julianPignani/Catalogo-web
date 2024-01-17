@@ -132,16 +132,16 @@ namespace negocio
             return lista;
         }
 
-        public void agregarFavorito( string idFavorito, int idUsuario)
+        public void agregarFavorito(Favorito favorito)
         {
             AccesoDatos datos = new AccesoDatos();
             
             try
             {
                 // Llamamos al método setearQuery para pasarle la consulta, SetearParametros y ejecutarAccion
-                datos.setearQuery("INSERT INTO FAVORITOS(idUsuario, idArticulo) VALUES (@idUsuario, @idArticulo)");
-                datos.setearParametros("@idUsuario", idUsuario);
-                datos.setearParametros("@idArticulo", idFavorito);
+                datos.setearQuery("INSERT INTO FAVORITOS(IdUser, IdArticulo) VALUES (@idUser, @idArticulo)");
+                datos.setearParametros("@idUser", favorito.IdUsuario);
+                datos.setearParametros("@idArticulo", favorito.IdArticulo);
                 datos.ejecutarAccion();
             }
             catch (Exception)

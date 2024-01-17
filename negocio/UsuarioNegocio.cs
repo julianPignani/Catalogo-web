@@ -28,9 +28,9 @@ namespace negocio
                     //Validamos la imagen, si es diferente a null, entonces guardamos la imagen, los demás los validamos porq son datos no requeridos y pueden generar error.
                     if (!(datos.Lector["urlImagenPerfil"] is DBNull))
                         usuario.ImagenPerfil = (string)datos.Lector["urlImagenPerfil"];
-                    if(!(datos.Lector["nombre"] is DBNull))
+                    if (!(datos.Lector["nombre"] is DBNull))
                         usuario.Nombre = (string)datos.Lector["nombre"];
-                    if(!(datos.Lector["apellido"] is DBNull))
+                    if (!(datos.Lector["apellido"] is DBNull))
                         usuario.Apellido = (string)datos.Lector["apellido"];
 
                     usuario.Admin = (bool)datos.Lector["admin"];
@@ -70,6 +70,8 @@ namespace negocio
 
             catch (Exception ex)
             {
+                // Puedes loguear el error o hacer cualquier otra acción que te ayude a depurar
+                Console.WriteLine($"Error en Registrarse: {ex.Message}");
 
                 throw ex;
             }

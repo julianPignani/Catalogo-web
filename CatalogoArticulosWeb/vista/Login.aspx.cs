@@ -28,6 +28,7 @@ namespace vista
                 if (negocio.Loguear(usuario))
                 {
                     Session.Add("usuario", usuario); //Agregamos un usuario a la Session
+                    Session["IdUsuario"] = usuario.Id;// Almacena el Id del usuario en la sesión
                     Response.Redirect("Bienvenida.aspx", false); //El false es para capturar una ex de .net
                 }
                 else
@@ -43,8 +44,5 @@ namespace vista
                 Response.Redirect("/Error.aspx", false);
             }
         }
-
-
-
     }
 }

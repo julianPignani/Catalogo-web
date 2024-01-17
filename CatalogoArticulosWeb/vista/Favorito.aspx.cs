@@ -12,6 +12,10 @@ namespace vista
     public partial class Favorito : System.Web.UI.Page
     {
         public string idArticulo;
+
+        public int IdUsuario { get; internal set; }
+        public string IdArticulo { get; internal set; }
+
         protected void Page_Load(object sender, EventArgs e)
         {
 
