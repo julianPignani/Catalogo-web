@@ -53,6 +53,25 @@ namespace vista
             try
             {
 
+                //Capturamos el Id que viene por el btnDeshacer
+                string idFavorito = (((Button)sender).CommandArgument);
+
+                //Llamamos al metodo
+                ArticuloNegocio negocio = new ArticuloNegocio();
+                negocio.eliminarFavorito(idFavorito);
+
+
+                if (Session["IdUsuario"] != null)
+                {
+                    int idUsuario = (int)Session["IdUsuario"];
+
+                    //Volvemos a mostrar los que quedan
+                    List<Articulo> favoritos = negocio.obtenerArticulosFavoritos(idUsuario);
+                    repFavorito.DataSource = favoritos;
+                    repFavorito.DataBind();
+
+                }
+
             }
             catch (Exception ex)
             {

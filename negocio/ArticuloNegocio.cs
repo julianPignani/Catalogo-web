@@ -522,14 +522,14 @@ namespace negocio
             }
         }
 
-        //Creamos el metodo para Eliminar un Artículo
-        /*public void eliminar(int id)
+        //Creamos el metodo para Eliminar un articulo de favorito
+        public void eliminarFavorito(string idFavorito)
         {
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                datos.setearQuery("DELETE FROM ARTICULOS where id = @id");
-                datos.setearParametros("@id", id);
+                datos.setearQuery("DELETE FROM FAVORITOS where IdArticulo = @idFavorito");
+                datos.setearParametros("@idFavorito", idFavorito);
                 datos.ejecutarAccion();
 
             }
@@ -542,7 +542,7 @@ namespace negocio
             {
                 datos.cerrarConexion();
             }
-        }*/
+        }
 
         //Metodo para agregar un Articulo
         /*public void agregar(Articulo nuevo)
