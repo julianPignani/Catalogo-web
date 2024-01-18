@@ -476,6 +476,52 @@ namespace negocio
             }
         }
 
+        public List<Articulo> obtenerArticulosFavoritos(int idUsuario)
+        {
+            List<Articulo> lista = new List<Articulo>();
+            AccesoDatos datos = new AccesoDatos();
+            try
+            {
+                string consulta = "SELECT A.Id, A.Nombre, M.Descripcion AS Marca, A.IdMarca , A.Descripcion, A.ImagenUrl " +
+                  "FROM Favoritos F " +
+                  "JOIN Articulos A ON F.IdArticulo = A.Id " +
+                  "JOIN Marcas M ON A.IdMarca = M.Id " +
+                  "WHERE F.IdUser = @IdUser";
+
+                datos.setearQuery(consulta);
+                datos.setearParametros("@IdUser", idUsuario);
+                datos.ejecutarQuery();
+
+                while (datos.Lector.Read())
+                {
+                    Articulo aux = new Articulo();
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Marca = new Marca();
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
+                    // Validamos la urlImagen por si esta null(Sirve para cualquier columna que no puede ser null)
+                    if (!(datos.Lector["ImagenUrl"] is DBNull)) //si no es null
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
+
+                    lista.Add(aux);
+
+
+                }
+                return lista;
+            }
+            catch (Exception ex )
+            {
+
+                throw ex;
+            }
+            finally
+            {
+                datos.cerrarConexion();
+            }
+        }
+
         //Creamos el metodo para Eliminar un Artículo
         /*public void eliminar(int id)
         {

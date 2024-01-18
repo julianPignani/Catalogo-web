@@ -9,7 +9,7 @@
         </div>
     </div>
     <div class="row row-cols-1 row-cols-md-4 g-4 m-3 align-items-center">
-        <asp:Repeater ID="repFavorito" runat="server">
+        <asp:Repeater ID="repFavorito" runat="server" EnableViewState="true">
             <ItemTemplate>
                 <div class="col">
                     <div class="card h-100 mb-3 d-flex flex-column">

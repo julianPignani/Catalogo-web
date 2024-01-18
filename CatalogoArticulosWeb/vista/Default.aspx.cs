@@ -12,10 +12,6 @@ namespace vista
 {
     public partial class Default : System.Web.UI.Page
     {
-        //creo una lista para agregar los favoritos. (para el evento btnCorazon)
-        List<string> favoritos;
-        //Declaro el user acá para poder tomarlo afuera de los if.(para el evento btnCorazon)
-        Usuario user;
 
         //Creamos una propiedad publica para traer la lista
         public List<Articulo> ListaArticulos { get; set; }
@@ -147,6 +143,7 @@ namespace vista
                         // También guardamos el ID en la base de datos
                         ArticuloNegocio negocio = new ArticuloNegocio();
                         negocio.agregarFavorito(favorito);
+
 
                         // Rediriges a la página Favoritos.aspx
                         Response.Redirect("Favorito.aspx", false);
