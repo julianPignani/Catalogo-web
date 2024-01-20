@@ -8,8 +8,8 @@
     <div class="container">
         <div class="container text-center mt-5 mb-3">
             <h1 class="display-4  text-primary m-3""><u>Listado de Artículos</u></h1>
-            </div>
         </div>
+    </div>
 
     <div class="row mb-3">
         <div class="col-md-6">
@@ -62,24 +62,19 @@
     </div>
     <% } %>
     <div class="mb-4" style="margin-bottom: 80px;">
-        <asp:GridView ID="dgvArticulos" CssClass="table table-bordered text-center" DataKeyNames="Id" AutoGenerateColumns="false" OnRowCommand="dgvArticulos_RowCommand"
+        <asp:GridView ID="dgvArticulos" CssClass="table table-bordered table-condensed table-responsive table-hover text-center" 
+            DataKeyNames="Id"  AutoGenerateColumns="false" 
+            OnSelectedIndexChanged="dgvArticulos_SelectedIndexChanged" 
             OnPageIndexChanging="dgvArticulos_PageIndexChanging" AllowPaging="true" PageSize="5" runat="server">
             <Columns>
-                <asp:BoundField HeaderText="id" DataField="Id" Visible="false" />
+                <asp:BoundField HeaderText="Id" DataField="Id" Visible="false" />
                 <asp:BoundField HeaderText="Código" DataField="Codigo" />
                 <asp:BoundField HeaderText="Nombre" DataField="Nombre" />
                 <asp:BoundField HeaderText="Descripción" DataField="Descripcion" />
                 <asp:BoundField HeaderText="Marca" DataField="Marca.Descripcion" />
                 <asp:BoundField HeaderText="Categoría" DataField="Categoria.Descripcion" />
                 <asp:BoundField HeaderText="Precio" DataField="Precio" />
-       
-                <asp:TemplateField HeaderText="Acción">
-    <ItemTemplate>
-        <asp:LinkButton ID="btnModificarEliminar" runat="server" CommandName="ModificarEliminar" Text="Modificar o Eliminar"
-            CommandArgument='<%# Eval("Id") %>'></asp:LinkButton>
-    </ItemTemplate>
-</asp:TemplateField>
-
+                <asp:CommandField HeaderText="Acción" ShowSelectButton="true" SelectText="🖊️" />
             </Columns>
         </asp:GridView>
         <div class="mt-3">

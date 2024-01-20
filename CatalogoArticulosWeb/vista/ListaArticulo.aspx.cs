@@ -41,14 +41,20 @@ namespace vista
             }
         }
 
-        //protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
-        //{
-        //    string id = Request.QueryString["id"] != null ? Request.QueryString["id"].ToString() : "";
-        //    // Obtener el valor del CommandArgument del botón en la columna de acción
-        //    //string id = dgvArticulos.SelectedDataKey["Id"].ToString();
-        //    //Y lo enviamos al formulario para modificar
-        //    Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
-        //}
+        protected void dgvArticulos_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+            GridViewRow selectedRow = dgvArticulos.SelectedRow;
+
+            if (selectedRow != null)
+            {
+                string id = dgvArticulos.DataKeys[selectedRow.RowIndex]["Id"].ToString();
+                Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
+            }
+
+            //string id = dgvArticulos.SelectedDataKey.Value.ToString();
+            //Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
+        }
 
         protected void dgvArticulos_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
@@ -61,13 +67,16 @@ namespace vista
         protected void filtro_TextChanged(object sender, EventArgs e)
         {
             List<Articulo> lista = (List<Articulo>)Session["listaArticulo"]; //Traigo la lista, que está guardada en Session
-            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())); //lambda expression
+            List<Articulo> listaFiltrada = lista.FindAll(x => x.Nombre.ToUpper().Contains(txtFiltro.Text.ToUpper())
+            || x.Marca.Descripcion.ToUpper().Contains(txtFiltro.Text.ToUpper())
+            || x.Categoria.Descripcion.ToUpper().Contains(txtFiltro.Text.ToUpper())); //lambda expression
             dgvArticulos.DataSource = listaFiltrada;
             dgvArticulos.DataBind();
         }
 
         protected void chkAvanzado_CheckedChanged(object sender, EventArgs e)
         {
+            //Activamos el filtro avanzado y descativamos el filtro normal
             FiltroAvanzado = chkAvanzado.Checked;
             txtFiltro.Enabled = !FiltroAvanzado;
         }
@@ -112,12 +121,10 @@ namespace vista
             {
 
                 ArticuloNegocio negocio = new ArticuloNegocio();
-                List<Articulo> listaFiltrada = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
+                dgvArticulos.DataSource = negocio.filtrar(ddlCampo.SelectedItem.ToString(),
                     ddlCriterio.SelectedItem.ToString(),
                     txtFiltroAvanzado.Text);
 
-                // Actualiza la fuente de datos del GridView con la lista filtrada
-                dgvArticulos.DataSource = listaFiltrada;
                 dgvArticulos.DataBind();
 
             }
@@ -126,17 +133,6 @@ namespace vista
                 Session.Add("error", ex.ToString());
                 Response.Redirect("Error.aspx", false);
 
-            }
-        }
-        protected void dgvArticulos_RowCommand(object sender, GridViewCommandEventArgs e)
-        {
-            if (e.CommandName == "ModificarEliminar")
-            {
-                // Obtener el ID del comando seleccionado
-                string id = e.CommandArgument.ToString();
-
-                // Y lo enviamos al formulario para modificar
-                Response.Redirect("FormularioArticulo.aspx?id=" + Server.UrlEncode(id), false);
             }
         }
     }
