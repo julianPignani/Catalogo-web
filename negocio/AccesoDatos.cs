@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;//Agregamos para ejercutar los comandos SQL.
+using System.Configuration;
 
 namespace negocio
 {
@@ -20,7 +21,9 @@ namespace negocio
         //Constructor a instanciar para empezar la conexion a la DB
         public AccesoDatos()
         {
-            conexion = new SqlConnection("server=.\\SQLEXPRESS01; database= CATALOGO_WEB_DB; integrated security = true");
+            //ahora la consumimos desde Web.config
+            //conexion = new SqlConnection("server=.\\SQLEXPRESS01; database= CATALOGO_WEB_DB; integrated security = true");
+            conexion = new SqlConnection(ConfigurationManager.AppSettings["cadenaConexion"]);
             comando = new SqlCommand();
 
         }

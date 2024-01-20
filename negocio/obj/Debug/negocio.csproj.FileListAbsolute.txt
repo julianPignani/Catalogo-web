@@ -25,3 +25,5 @@ C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.csproj.CoreCompileInputs.c
 C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.csproj.CopyComplete
 C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.dll
 C:\CatalogoWeb\Catalogo-web\negocio\obj\Debug\negocio.pdb
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Debug\System.Configuration.ConfigurationManager.dll
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Debug\System.Configuration.ConfigurationManager.xml
