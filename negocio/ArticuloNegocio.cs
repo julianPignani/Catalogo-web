@@ -16,43 +16,48 @@ namespace negocio
         {
             //Creamos la lista articulos y instanciamos la AccesoDatos para la conexion
             List<Articulo> lista = new List<Articulo>();
-            SqlConnection conexion = new SqlConnection();
-            SqlCommand comando = new SqlCommand();
-            SqlDataReader lector;
-
+            AccesoDatos datos = new AccesoDatos();
             //Configuramos
             try
             {
-                conexion.ConnectionString = "server =.\\SQLEXPRESS01; database = CATALOGO_WEB_DB; integrated security = true";
-                comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT A.Id, Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, M.Id as IdMarca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria ";
-                if (id != "") //validamos si viene con un id
-                    comando.CommandText += " and A.Id = " + id; //esto devuelve una lista, pero solo el articulo con el num del id(esto para el metodo modificar)
-                comando.Connection = conexion;
-                conexion.Open();
-                lector = comando.ExecuteReader();
+                datos = new AccesoDatos();
+                // Inicializar la consulta
+                string consulta = "SELECT A.Id, Codigo, Nombre, A.Descripcion, ImagenUrl, Precio, M.Descripcion as Marca, M.Id as IdMarca, C.Id as IdCategoria, C.Descripcion as Categoria FROM ARTICULOS A, MARCAS M, CATEGORIAS C WHERE M.Id = A.IdMarca AND C.Id = A.IdCategoria ";
 
-                while (lector.Read())
+                // Validar si se proporciona un ID y agregar la condición correspondiente
+                if (!string.IsNullOrEmpty(id))
+                {
+                    consulta += " AND A.Id = @Id";
+                    // Setear el parámetro correspondiente al ID
+                    datos.setearParametros("@Id", id);
+                }
+
+                // Establecer la consulta modificada
+                datos.setearQuery(consulta);
+
+                datos.ejecutarQuery();
+
+                while (datos.Lector.Read())
                 {
                     Articulo aux = new Articulo();
-                    aux.Id = (int)lector["Id"];
-                    aux.Codigo = (string)lector["Codigo"];
-                    aux.Nombre = (string)lector["Nombre"];
-                    aux.Descripcion = (string)lector["Descripcion"];
+                    aux.Id = (int)datos.Lector["Id"];
+                    aux.Codigo = (string)datos.Lector["Codigo"];
+                    aux.Nombre = (string)datos.Lector["Nombre"];
+                    aux.Descripcion = (string)datos.Lector["Descripcion"];
 
                     aux.Marca = new Marca();
-                    aux.Marca.Id = (int)lector["IdMarca"];
-                    aux.Marca.Descripcion = (string)lector["Marca"];
+                    aux.Marca.Id = (int)datos.Lector["IdMarca"];
+                    aux.Marca.Descripcion = (string)datos.Lector["Marca"];
 
                     aux.Categoria = new Categoria();
-                    aux.Categoria.Id = (int)lector["IdCategoria"];
-                    aux.Categoria.Descripcion = (string)lector["Categoria"];
+                    aux.Categoria.Id = (int)datos.Lector["IdCategoria"];
+                    aux.Categoria.Descripcion = (string)datos.Lector["Categoria"];
 
                     //Validamos la urlImagen por si esta null (Sirve para cualquier columna que no puede ser null)
-                    if (!(lector["ImagenUrl"] is DBNull)) //si no es null
-                        aux.ImagenUrl = (string)lector["ImagenUrl"];
+                    if (!(datos.Lector["ImagenUrl"] is DBNull)) //si no es null
+                        aux.ImagenUrl = (string)datos.Lector["ImagenUrl"];
 
-                    aux.Precio = (decimal)lector["Precio"];
+                    aux.Precio = (decimal)datos.Lector["Precio"];
 
                     lista.Add(aux);
                 }
@@ -67,7 +72,7 @@ namespace negocio
             }
             finally
             {
-                conexion.Close();
+                datos.cerrarConexion();
             }
 
         }
@@ -482,13 +487,12 @@ namespace negocio
             AccesoDatos datos = new AccesoDatos();
             try
             {
-                string consulta = "SELECT A.Id, A.Nombre, M.Descripcion AS Marca, A.IdMarca , A.Descripcion, A.ImagenUrl " +
+
+                datos.setearQuery("SELECT A.Id, A.Nombre, M.Descripcion AS Marca, A.IdMarca , A.Descripcion, A.ImagenUrl " +
                   "FROM Favoritos F " +
                   "JOIN Articulos A ON F.IdArticulo = A.Id " +
                   "JOIN Marcas M ON A.IdMarca = M.Id " +
-                  "WHERE F.IdUser = @IdUser";
-
-                datos.setearQuery(consulta);
+                  "WHERE F.IdUser = @IdUser");
                 datos.setearParametros("@IdUser", idUsuario);
                 datos.ejecutarQuery();
 

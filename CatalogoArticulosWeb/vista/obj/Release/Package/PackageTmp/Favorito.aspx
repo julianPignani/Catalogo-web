@@ -8,7 +8,7 @@
             <h1 class="display-4  text-primary m-3"><u>Mis artículos favoritos</u></h1>
         </div>
     </div>
-    <div class="row row-cols-1 row-cols-md-4 g-4 m-3 align-items-center">
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-3 align-items-center">
         <asp:Repeater ID="repFavorito" runat="server" EnableViewState="true">
             <ItemTemplate>
                 <div class="col">
