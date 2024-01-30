@@ -1,0 +1,134 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="MyMaster.master.cs" Inherits="vista.MyMaster" %>
+
+<!DOCTYPE html>
+
+<html>
+<head runat="server">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <title>Mi Web</title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            color: #000; /* Color del texto */
+            margin: 0; /* Eliminar márgenes predeterminados del cuerpo */
+            padding-bottom: 0px; /* Espacio para el footer */
+        }
+
+        #login-link {
+            color: green; /* Color por defecto del texto */
+        }
+
+            #login-link:hover {
+                color: white !important; /* Color del texto al pasar el mouse */
+                background-color: green !important; /* Color del fondo al pasar el mouse */
+            }
+
+        #registrate-link {
+            color: blue;
+        }
+
+            #registrate-link:hover {
+                color: white !important;
+                background-color: blue !important;
+            }
+
+        #btnSalir:hover {
+            color: white !important;
+            background-color: red;
+        }
+
+        #titulo {
+            font-family: 'Lobster', cursive;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+    </style>
+
+</head>
+<body class="d-flex flex-column min-vh-100">
+    <div class="container-fluid text-center mt-4 bg-dark text-white">
+        <h1 class="display-4" id="titulo">¡¡Bienvenidos a TegnoMundo!!</h1>
+        <p class="lead font-bold fs-4">Encuentra los mejores productos para tu entretenimiento.</p>
+    </div>
+    <div class="p-3 mb-2 bg-warning-subtle text-emphasis-warning flex-grow-1">
+        <form id="form1" runat="server">
+            <nav class="navbar bg-transparent navbar-expand-lg border-body shadow" data-bs-theme="dark">
+                <div class="container-fluid p-0">
+                    <a id="registrate-link" class="nav-link text-primary btn btn-primary  fw-bold fs-5 m-2" href="Bienvenida.aspx">Home</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="Default.aspx">Nuestros Productos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="ListaArticulo.aspx">Lista de Articulos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="Favorito.aspx">Favoritos</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-primary btn btn-outline-primary  active fw-bold text-white fs-5 m-2" aria-current="page" href="MiPerfil.aspx">Mi Perfil</a>
+                            </li>
+                        </ul>
+                        <% if (!negocio.Seguridad.sesionActiva(Session["usuario"]))
+                            {%>
+
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <a id="login-link" class="nav-link text-success btn btn-primary m-1 fw-bold fs-5 m-2" href="Login.aspx">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a id="registrate-link" class="nav-link text-primary btn btn-primary m-1 fw-bold fs-5 m-2" href="Registro.aspx">Registrate</a>
+                            </li>
+                        </ul>
+                        <% 
+                            }
+                            else
+                            {
+                        %>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <asp:Button Text="Salir" ID="btnSalir" runat="server" CssClass=" btn btn-outline-danger m-1 fw-bold fs-5 " OnClick="btnSalir_Click" />
+                            </li>
+                        </ul>
+                        <%} %>
+                        <ul class="navbar-nav ml-auto">
+                            <li class="nav-item">
+                                <asp:Image ID="imgPerfil" runat="server" Style="height: 60px; width: 60px; border-radius: 50%; margin-right: 10px;" />
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <hr />
+            <div class="container">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                </asp:ContentPlaceHolder>
+            </div>
+            <footer id="footer" class="container-fluid text-center mt-4 mb-0 bg-dark text-white " style="padding: 0.1rem; text-align: center; position: fixed; bottom: 0; left: 0; width: 100%;">
+                <div class=" d-flex align-items-center justify-content-center">
+                    <p>@2024 - Desarrollado por Julián Pignani</p>
+                </div>
+            </footer>
+        </form>
+    </div>
+
+        <!-- Agrega el siguiente script para cargar jQuery y Bootstrap JS desde CDN -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-12Y9o1YYUnWy0XqBRsIkzD5f9AxNKUDqSWxW04jDIQU8e2F0Y8llv+KxUIdxWWea" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+Wy61q39/cFDSjS10peP5gI0FkU1pbzm6V" crossorigin="anonymous"></script>
+</body>
+</html>

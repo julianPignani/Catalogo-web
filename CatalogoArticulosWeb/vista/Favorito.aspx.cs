@@ -33,11 +33,6 @@ namespace vista
                             repFavorito.DataSource = favoritos;
                             repFavorito.DataBind();
                         }
-                        else
-                        {
-                            // Log: No hay favoritos para el usuario
-                            System.Diagnostics.Debug.WriteLine("No hay favoritos para el usuario con Id: " + idUsuario);
-                        }
                     }
                 }
             }

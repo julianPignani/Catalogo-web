@@ -134,8 +134,9 @@ namespace vista
                 {
                     ArticuloNegocio negocio = new ArticuloNegocio();
                     negocio.eliminarconSP(int.Parse(txtId.Text));
-                    Response.Redirect("ListaArticulo.aspx");
+                    
                 }
+                Response.Redirect("ListaArticulo.aspx", false);
             }
             catch (Exception ex)
             {

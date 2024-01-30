@@ -1,0 +1,6 @@
+C:\CatalogoWeb\Catalogo-web\dominio\bin\Release\dominio.dll
+C:\CatalogoWeb\Catalogo-web\dominio\bin\Release\dominio.pdb
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Release\dominio.csproj.AssemblyReference.cache
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Release\dominio.csproj.CoreCompileInputs.cache
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Release\dominio.dll
+C:\CatalogoWeb\Catalogo-web\dominio\obj\Release\dominio.pdb

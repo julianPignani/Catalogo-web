@@ -63,7 +63,7 @@
             </div>
 
             <%  } %> --%>
-    <div class="row row-cols-1 row-cols-md-4 g-4 m-3 align-items-center">
+    <div class="row row-cols-1 row-cols-md-3 g-4 m-3 align-items-center">
         <asp:Repeater ID="repRepetidor" runat="server">
             <ItemTemplate>
                 <div class="col">

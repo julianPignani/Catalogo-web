@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -63,9 +64,25 @@ namespace vista
                 if (txtImagen.PostedFile.FileName != "") //(si no hay nada seleccionado significa que esta vacio, sino capturamos la ruta)
                 {
                     string nombreArchivo = "perfil-" + user.Id + "-" + DateTime.Now.ToString("yyyyMMddHHmmssfff") + ".jpg";
-                    string ruta = Server.MapPath("./Images/");
-                    txtImagen.PostedFile.SaveAs(ruta + nombreArchivo);
-               
+
+                    // Obtener la ruta física del directorio raíz de la aplicación
+                    string rutaRaiz = Server.MapPath("~/");
+
+                    // Concatenar la carpeta "Images"
+                    string rutaCarpeta = Path.Combine(rutaRaiz, "Images");
+
+                    // Verificar si la carpeta existe, y crearla si es necesario
+                    if (!Directory.Exists(rutaCarpeta))
+                    {
+                        Directory.CreateDirectory(rutaCarpeta);
+                    }
+
+                    // Combinar la ruta de la carpeta con el nombre del archivo
+                    string rutaCompleta = Path.Combine(rutaCarpeta, nombreArchivo);
+
+                    // Guardar el archivo en la ruta completa
+                    txtImagen.PostedFile.SaveAs(rutaCompleta);
+
                     // Actualizamos la propiedad ImagenPerfil 
                     user.ImagenPerfil = nombreArchivo;
                 }
@@ -78,10 +95,6 @@ namespace vista
                 //para poder acceder a la master y buscar el id de la imagen el el aspx
                 Image img = (Image)Master.FindControl("imgPerfil");
                 img.ImageUrl = "~/Images/" + user.ImagenPerfil + "?timestamp=" + DateTime.Now.Ticks;
-
-
-                // Ejecutar la función JavaScript después de guardar
-                //ScriptManager.RegisterStartupScript(this, this.GetType(), "mostrarMensaje", "mostrarMensaje();", true);
 
                 Response.Redirect("MiPerfil.aspx", false);
             }

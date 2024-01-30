@@ -1,0 +1,11 @@
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Release\negocio.dll
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Release\negocio.pdb
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Release\dominio.dll
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Release\System.Configuration.ConfigurationManager.dll
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Release\dominio.pdb
+C:\CatalogoWeb\Catalogo-web\negocio\bin\Release\System.Configuration.ConfigurationManager.xml
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Release\negocio.csproj.AssemblyReference.cache
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Release\negocio.csproj.CoreCompileInputs.cache
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Release\negocio.csproj.CopyComplete
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Release\negocio.dll
+C:\CatalogoWeb\Catalogo-web\negocio\obj\Release\negocio.pdb

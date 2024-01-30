@@ -24,15 +24,25 @@ namespace vista
 
                 }
 
-                //Validamos para que la imagen quede guardada en el avatar  en todas las vistas mientras la session este abierta.
+                // Validamos para que la imagen quede guardada en el avatar en todas las vistas mientras la sesión esté abierta.
                 if (Seguridad.sesionActiva(Session["usuario"]))
                 {
-                    //verificamos si la img en la DB es null.
-                    imgPerfil.ImageUrl = "~/Images/" + ((Usuario)Session["usuario"]).ImagenPerfil;
+                    Usuario usuario = (Usuario)Session["usuario"];
+
+                    // Verificamos si la imagen en la DB es null.
+                    if (!string.IsNullOrEmpty(usuario.ImagenPerfil))
+                    {
+                        imgPerfil.ImageUrl = "~/Images/" + usuario.ImagenPerfil + "?timestamp=" + DateTime.Now.Ticks;
+                    }
+                    else
+                    {
+                        // Si la imagen en la base de datos es null, asignamos una URL por defecto.
+                        imgPerfil.ImageUrl = "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
+                    }
                 }
                 else
                 {
-                    //Si la sesión no está activa, tambien asignamos la url por defecto.
+                    // Si la sesión no está activa, también asignamos la URL por defecto.
                     imgPerfil.ImageUrl = "https://static.vecteezy.com/system/resources/previews/004/141/669/non_2x/no-photo-or-blank-image-icon-loading-images-or-missing-image-mark-image-not-available-or-image-coming-soon-sign-simple-nature-silhouette-in-frame-isolated-illustration-vector.jpg";
                 }
             }
